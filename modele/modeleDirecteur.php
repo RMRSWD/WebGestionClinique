@@ -30,3 +30,12 @@ function recupererInfoMedecin()
   $recupererinforM = $resultat->fetchall(); //tra lai toan thong tin theo dong
   return $recupererinforM;
 }
+function recupererInfoModifAgent($idPersonnelAD)
+{
+  $connexion = getConnect();
+  $requete = "SELECT  * FROM  gestionconnect WHERE id='$idPersonnelAD'";
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $recupererinformodifA = $resultat->fetchall();
+  return $recupererinformodifA;
+}

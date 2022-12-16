@@ -33,12 +33,33 @@ function afficherCreerSucess()
 
 function afficherInforAgent($inforAgent)
 {
+  $contenuPersonnelAD = '<form action="site.php" method= "POST"> 
+  <fieldset> <legend>Tous Les Agents</legend>';
+  foreach ($inforAgent as $ligne) {
+    $contenuPersonnelAD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
+
+    <p><label>Login: ' . $ligne->login . '</label> </p> 
+
+
+    <p><label> Mot  de passe: ' . $ligne->mdp . '</label></p>
+
+
+    <p<label> Nom: ' . $ligne->nomP . '</label></p>
+
+
+    <p><label>Prenom: ' . $ligne->prenomP . '</label>
+    </p><hr>
+    ';
+  }
+  $contenuPersonnelAD .= '</fieldset></form>';
+  require_once('vue/gabarit/gabaritDirecteur.php');
+}
+function afficherPourModifierInforAgent($informodifAgent)
+{
   $contenuModifLogMotAD = '<form action="site.php" method= "POST"> 
   <fieldset> <legend>Afficher les bases d\'agent</legend>';
-  foreach ($inforAgent as $ligne) {
-    $contenuModifLogMotAD .= '<p><label for="">ID </label>' . $ligne->id . '</p>
-
-
+  foreach ($informodifAgent as $ligne) {
+    $contenuModifLogMotAD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
 
     <p><input type="checkbox" name="choixloginAD" onclick="affichernewlignelogin(\'newlignelogin\')"><label>Login: ' . $ligne->login . '</label>
     <script type="text/javascript" >
@@ -81,7 +102,7 @@ function afficherInforAgent($inforAgent)
       }
       </script>
       <p id="newligneprenom"></p>
-    </p><hr>
+    </p>
     ';
   }
   $contenuModifLogMotAD .= '</fieldset></form>';
@@ -90,10 +111,33 @@ function afficherInforAgent($inforAgent)
 
 function afficherInforMedecin($inforMedecin)
 {
+  $contenuPersonnelMD = '<form action="site.php" method= "POST"> 
+  <fieldset> <legend>Afficher les bases de medecin</legend>';
+  foreach ($inforMedecin as $ligne) {
+    $contenuPersonnelMD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
+    <p><label>Login: ' . $ligne->login . '</label></p> 
+
+
+    <p><label> Mot  de passe: ' . $ligne->mdp . '</label></p>
+
+
+    <p><label> Nom: ' . $ligne->nomP . '</label></p>
+
+
+    <p><label>Prenom: ' . $ligne->prenomP . '</label></p><hr>
+    ';
+  }
+  $contenuPersonnelMD .= '</fieldset></form>';
+  require_once('vue/gabarit/gabaritDirecteur.php');
+}
+
+function afficherPourModifierInforMedecin($inforMedecin)
+{
+
   $contenuModifLogMotMD = '<form action="site.php" method= "POST"> 
   <fieldset> <legend>Afficher les bases de medecin</legend>';
   foreach ($inforMedecin as $ligne) {
-    $contenuModifLogMotMD .= '<p><label for="">ID </label>' . $ligne->id . '</p>
+    $contenuModifLogMotMD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
     <p><input type="checkbox" name="choixloginMD" onclick="affichernewligneloginM(\'newligneloginM\')"><label>Login: ' . $ligne->login . '</label>
     <script type="text/javascript" >
       function affichernewligneloginM(n) { 

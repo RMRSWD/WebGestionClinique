@@ -74,11 +74,17 @@ try {
     $creelogin = $_POST["creelogin"];
     $creemdp = $_POST["creepassword"];
     CtrCreerNewLogin($creelogin, $creemdp);
-  } else if (isset($_POST["modifierLogMotAD"])) {
+  } else if (isset($_POST["afficherPersonnelAD"])) {
     CtlAfficherInformationAgent();
-  } else if (isset($_POST["modifierLogMotMD"])) {
+  } else if (isset($_POST["afficherPersonnelMD"])) {
     CtlAfficherInformationMedecin();
+  } else if (isset($_POST["modifInforPersonnelAD"])) {
+    $idPersonnelAD = $_POST["idPersonnelAD"];
+    CtlModifierInforAgentD($idPersonnelAD);
   }
+  //elseif(){
+  //Commencer modifier les information d'agent
+  //}
 
 
 

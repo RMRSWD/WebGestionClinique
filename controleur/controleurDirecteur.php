@@ -32,3 +32,12 @@ function CtlAfficherInformationMedecin()
 {
   afficherInforMedecin(recupererInfoMedecin());
 }
+
+function CtlModifierInforAgentD($idPersonnelAD)
+{
+  if (!empty($idPersonnelAD)) {
+    afficherPourModifierInforAgent(recupererInfoModifAgent($idPersonnelAD));
+  } else {
+    throw new Exception("Login est invalide");
+  }
+}

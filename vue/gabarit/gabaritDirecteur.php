@@ -41,15 +41,36 @@
   ?>
   <form action="site.php" method="POST">
     <fieldset>
-      <legend>Modifier Information d'Agent</legend>
+      <legend>Afficher Information d'Agent</legend>
       <p>
-        Pour modifier le login et mot de passe des agents. Tapez sur la bouton "Afficher"
+        Cliquez sur la bouton "Afficher". Pour afficher tous les informations d'agent.
       </p>
       <p>
-        <input type="submit" name="modifierLogMotAD" value="Afficher">
+        <input type="submit" name="afficherPersonnelAD" value="Afficher">
       </p>
     </fieldset>
   </form>
+  <?php
+  if (!empty($contenuPersonnelAD)) {
+    echo $contenuPersonnelAD;
+  }
+  ?>
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>Modifier Information d'Agent</legend>
+      <p>
+        Pour modifier les renseignements d’un agent. Veuillez entrer son ID pour effectuer le changement.<br>
+        <i>Si vous ne connaissez pas le numéro ID d’agent, cliquez sur le bouton Afficher dans la formule ci-dessus pour le trouver.</i>
+      </p>
+      <p>
+      </p>
+      <p>
+        <label>ID: </label><input type="text" name="idPersonnelAD">
+        <input type="submit" name="modifInforPersonnelAD" value="Valider">
+      </p>
+    </fieldset>
+  </form>
+
   <?php
   if (!empty($contenuModifLogMotAD)) {
     echo $contenuModifLogMotAD;
@@ -62,10 +83,16 @@
         Pour modifier le login et mot de passe des médecins. Tapez sur la bouton "Afficher"
       </p>
       <p>
-        <input type="submit" name="modifierLogMotMD" value="Afficher">
+        <input type="submit" name="afficherPersonnelMD" value="Afficher">
       </p>
     </fieldset>
   </form>
+
+  <?php
+  if (!empty($contenuPersonnelMD)) {
+    echo $contenuPersonnelMD;
+  }
+  ?>
 
   <?php
   if (!empty($contenuModifLogMotMD)) {
