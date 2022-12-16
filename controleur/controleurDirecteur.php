@@ -1,7 +1,34 @@
 <?php
 require_once('vue/vue_/vueDirecteur.php');
+require_once('modele/modeleDirecteur.php');
+
 
 function CtlAccueilDirect()
 {
-  afficherAcceuilleDirecteur();
+  $nom = $_SESSION['Directeur']->nomP;
+  $prenom = $_SESSION['Directeur']->prenomP;
+  afficherAcceuilleDirecteur($nom, $prenom);
+}
+function CtlDeconnexionDirecteur()
+{
+  deconnexion();
+}
+
+function CtrCreerNewLogin($login, $mdp)
+{
+  if (!empty($login) && !empty($mdp)) {
+    creerNewLogin($login, $mdp);
+    afficherCreerSucess();
+  } else {
+    throw new Exception("Login ou mot de passe est invalide");
+  }
+}
+
+function CtlAfficherInformationAgent()
+{
+  afficherInforAgent(recupererInfoAgent());
+}
+function CtlAfficherInformationMedecin()
+{
+  afficherInforMedecin(recupererInfoMedecin());
 }

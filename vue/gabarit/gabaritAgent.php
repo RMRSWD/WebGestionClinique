@@ -14,8 +14,15 @@
 
 <body>
   <h1>
-    Bienvenue sur la page d'agent
+    <?php
+    echo "Bienvenue sur la page d'agent " . $nom . " " . $prenom;
+
+    ?>
   </h1>
+  <form action="site.php" method="POST">
+    <p><input type="submit" name="deconecte" value="Déconnexion"></p>
+  </form>
+
 
   <form action="site.php" method="POST" name="form1">
     <fieldset>
@@ -42,12 +49,8 @@
       </p>
       <p>
         <label for="">Numéro de téléphone:</label>
-        <input type="text" name="numtel">
+        <input type="text" name="numtel" maxlength="10">
       </p>
-      <!-- <p>
-        <label for="">Département de naissance: </label>
-        <input type="text" name="departementdenaissance">
-      </p> -->
       <p>
         Dans quel département habitez-vous ?<br />
         <select name="departementdenaissance">
@@ -57,6 +60,11 @@
           <option value="" name="saisirEtranger" onclick="saisirPaysEtranger('saisirPaysEtranger')">99 </option>
         </select>
       <p id="saisirPaysEtranger">
+
+      <p>
+        <label for="">Solde du patient: </label>
+        <input type="text" name="deposer">
+      </p>
 
       </p>
       </p>
@@ -75,11 +83,63 @@
   }
   ?>
 
-  <form action="site.php" method="POST">
+  <form action="site.php" method="POST" name="form2">
     <fieldset>
-      <legend>Modifier les information du patient</legend>
+      <legend>Modifier les informations du patient</legend>
+      <form action="site.php" method="POST">
+        <p>Pour trouver et modifier un patient saisir nom et prénom et taper "Chercher".</p>
+        <p>
+          <label for="nom">Nom:</label>
+          <input type="text" name="nom">
+        </p>
+        <p>
+          <label for="prenom">Prénom:</label>
+          <input type="text" name="prenom">
+        </p>
+        <p>
+          <input type="submit" value="Chercher" name="chercher">
+        </p>
+      </form>
     </fieldset>
   </form>
+  <?php
+  if (!empty($afficherpatient)) {
+    echo $afficherpatient;
+  }
+  ?>
+  <?php
+  if (!empty($afficherModifierAvecSucess)) {
+    echo $afficherModifierAvecSucess;
+  }
+  ?>
+  <?php
+  if (!empty($afficherErreurChiffre)) {
+    echo $afficherErreurChiffre;
+  }
+  ?>
+
+  <form action="site.php" method="POST" name="form3">
+    <fieldset>
+      <legend> Afficher la synthèse d'un patient</legend>
+      <hr>
+      <p>Saisir le NSS du patient pour afficher la synthèse</p>
+      <hr>
+      <p>
+        <label for="">NSS: </label>
+        <input type="text" name="nss2">
+      </p>
+      <p>
+        <input type="submit" name="affichersynthese" value="synthèse patient">
+      </p>
+    </fieldset>
+  </form>
+  <?php
+  if (!empty($affichersynthesepatient)) {
+    echo $affichersynthesepatient;
+  }
+  ?>
+
+
 
 </body>
 

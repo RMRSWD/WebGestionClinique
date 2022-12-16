@@ -12,7 +12,7 @@ function getConnect()
 function checkUser($login, $mdp)
 {
   $connexion = getConnect();
-  $requete = "SELECT * FROM gestionconnect WHERE login='$login' AND mdp='$mdp' ";
+  $requete = "SELECT * FROM gestionconnect WHERE login='$login' AND mdp='$mdp'";
   $resultat = $connexion->query($requete);
   $resultat->setFetchMode(PDO::FETCH_OBJ);
   $check = $resultat->fetch();

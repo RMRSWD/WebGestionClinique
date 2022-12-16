@@ -9,7 +9,15 @@
 </head>
 
 <body>
-  <h1> Bienvenue sur la page de medecin</h1>
+  <h1>
+    <?php
+    echo "Bienvenue sur la page de medecin " . $nom . " " . $prenom;
+
+    ?>
+  </h1>
+  <form action="site.php" method="POST">
+    <input type="submit" name="deconnexionMedecin" value="Déconnexion">
+  </form>
 </body>
 
 <?php
