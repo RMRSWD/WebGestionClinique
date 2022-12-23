@@ -23,18 +23,30 @@ function afficherCreerSucess()
   $afficherCreerSucess .= '<script>
   alert("un nouveau médecin est bien créé");
   </script>';
-  // if (!isset($_SESSION['Directeur'])) {
-  //   session_start();
-  // } else {
-  //   session_start();
-  // }
+  require_once('vue/gabarit/gabaritDirecteur.php');
+}
+function affficherModifierSucess()
+{
+  $afficherModifierSucess = '';
+  $afficherModifierSucess .= '<script>
+  alert("Votre modification est bien enregistrée");
+  </script>';
+  require_once('vue/gabarit/gabaritDirecteur.php');
+}
+
+function afficherCreerMotifSucess()
+{
+  $afficherCreerMotifSucess = '<script>
+  alert("Un motif est bien enregistrée");
+  </script>';
   require_once('vue/gabarit/gabaritDirecteur.php');
 }
 
 function afficherInforAgent($inforAgent)
 {
   $contenuPersonnelAD = '<form action="site.php" method= "POST"> 
-  <fieldset> <legend>Tous Les Agents</legend>';
+  <fieldset> <legend>Tous Les Agents</legend>
+  <i>Pour modifier les informations d\'un agent. Vous cliquez directement sur le champ que vous voulez modifier. Ensuite, cliquez sur le bouton "Enregistrer" pour enregistrer les informations. </i>';
   foreach ($inforAgent as $ligne) {
     $contenuPersonnelAD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
 
@@ -57,52 +69,40 @@ function afficherInforAgent($inforAgent)
 function afficherPourModifierInforAgent($informodifAgent)
 {
   $contenuModifLogMotAD = '<form action="site.php" method= "POST"> 
-  <fieldset> <legend>Afficher les bases d\'agent</legend>';
+  <fieldset> <legend>Afficher les bases d\'agent</legend>
+  <i>Pour modifier les informations d\'un médecin. Vous cliquez directement sur le champ que vous voulez modifier. Ensuite, cliquez sur le bouton "Enregistrer" pour enregistrer les informations. </i>
+  ';
   foreach ($informodifAgent as $ligne) {
-    $contenuModifLogMotAD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
+    $contenuModifLogMotAD .= '<table border="1" align="center" cellspacing="0"cellpadding="0" with="850px">
+    <tr>
+    <td colspan="2"><h2>Modifier Information Agent</h2></td>
+    </tr>
+    <tr>
+    <td>ID </td>
+    <td> <input type="text" name="idAgent" readonly="readonly" value="' . $ligne->id . '"> </td>
+    </tr>
+    <tr>
+    <td>Login </td>
+    <td> <input type="text" name="loginAgent" value="' . $ligne->login . '"> </td>
+    </tr>
+    <td>Mot de passe </td>
+    <td> <input type="text" name="mdpAgent"  value="' . $ligne->mdp . '"> </td>
+    </tr>
+    <tr>
+    <td>Nom </td>
+    <td> <input type="text" name="nomAgent"  value="' . $ligne->nomP . '"> </td>
+    </tr>
+    <td>Prénom </td>
+    <td> <input type="text" name="prenomAgent"  value="' . $ligne->prenomP . '"> </td>
+    </tr>
+    <tr>
+    <td colspan="2" align="center">
+    <input type="submit" name="modifierAgentD" value="Enregistrer">
+    </td>
+    </tr>
+    </table>
+    
 
-    <p><input type="checkbox" name="choixloginAD" onclick="affichernewlignelogin(\'newlignelogin\')"><label>Login: ' . $ligne->login . '</label>
-    <script type="text/javascript" >
-      function affichernewlignelogin(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier login: <input type="text" name="modifierlogin" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validerloginD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newlignelogin"></p>
-    </p> 
-
-
-    <p><input type="checkbox" name="choixmdp" onclick="affichernewlignemdp(\'newlignemdp\')"><label> Mot  de passe: ' . $ligne->mdp . '</label>
-    <script type="text/javascript" >
-      function affichernewlignemdp(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier mot de passe: <input type="text" name="modifierlogin" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validermdpD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newlignemdp"></p>
-    </p>
-
-
-    <p><input type="checkbox" name="choixNomAD" onclick="affichernewlignenom(\'newlignenom\')"><label> Nom: ' . $ligne->nomP . '</label>
-    <script type="text/javascript" >
-      function affichernewlignenom(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier mot de passe: <input type="text" name="modifiernom" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernomD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newlignenom"></p>
-    </p>
-
-
-    <p><input type="checkbox" name="choixPrenomAD" onclick="affichernewligneprenom(\'newligneprenom\')"><label>Prenom: ' . $ligne->prenomP . '</label>
-    <script type="text/javascript" >
-      function affichernewligneprenom(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier mot de passe: <input type="text" name="modifiernom" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernomD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newligneprenom"></p>
-    </p>
     ';
   }
   $contenuModifLogMotAD .= '</fieldset></form>';
@@ -137,51 +137,69 @@ function afficherPourModifierInforMedecin($inforMedecin)
   $contenuModifLogMotMD = '<form action="site.php" method= "POST"> 
   <fieldset> <legend>Afficher les bases de medecin</legend>';
   foreach ($inforMedecin as $ligne) {
-    $contenuModifLogMotMD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
-    <p><input type="checkbox" name="choixloginMD" onclick="affichernewligneloginM(\'newligneloginM\')"><label>Login: ' . $ligne->login . '</label>
-    <script type="text/javascript" >
-      function affichernewligneloginM(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier login: <input type="text" name="modifierloginM" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validerloginMD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newligneloginM"></p>
-    </p> 
-
-
-    <p><input type="checkbox" name="choixmdpMD" onclick="affichernewlignemdpM(\'newlignemdpM\')"><label> Mot  de passe: ' . $ligne->mdp . '</label>
-    <script type="text/javascript" >
-      function affichernewlignemdpM(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier mot de passe: <input type="text" name="modifierloginM" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validermdpMD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newlignemdpM"></p>
-    </p>
-
-
-    <p><input type="checkbox" name="choixNomMD" onclick="affichernewlignenomM(\'newlignenomMD\')"><label> Nom: ' . $ligne->nomP . '</label>
-    <script type="text/javascript" >
-      function affichernewlignenomM(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier mot de passe: <input type="text" name="modifiernomMD" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernomMD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newlignenomMD"></p>
-    </p>
-
-
-    <p><input type="checkbox" name="choixPrenomMD" onclick="affichernewligneprenomM(\'newligneprenomMD\')"><label>Prenom: ' . $ligne->prenomP . '</label>
-    <script type="text/javascript" >
-      function affichernewligneprenomM(n) { 
-        document.getElementById(n).innerHTML += \'<p>Modifier mot de passe: <input type="text" name="modifiernomMD" value=""></p>\';
-        document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernomMD" value="Valider"></p> \';
-      }
-      </script>
-      <p id="newligneprenomMD"></p>
-    </p><hr>
+    $contenuModifLogMotMD .= '<table border="1" align="center" cellspacing="0"cellpadding="0" with="850px">
+    <tr>
+    <td colspan="2"><h2>Modifier Information Medecin</h2></td>
+    </tr>
+    <tr>
+    <td>ID </td>
+    <td> <input type="text" name="idMedecin" readonly="readonly" value="' . $ligne->id . '"> </td>
+    </tr>
+    <tr>
+    <td>Login </td>
+    <td> <input type="text" name="loginMedecin" value="' . $ligne->login . '"> </td>
+    </tr>
+    <td>Mot de passe </td>
+    <td> <input type="text" name="mdpMedecin"  value="' . $ligne->mdp . '"> </td>
+    </tr>
+    <tr>
+    <td>Nom </td>
+    <td> <input type="text" name="nomMedecin"  value="' . $ligne->nomP . '"> </td>
+    </tr>
+    <td>Prénom </td>
+    <td> <input type="text" name="prenomMedecin"  value="' . $ligne->prenomP . '"> </td>
+    </tr>
+    <tr>
+    <td colspan="2" align="center">
+    <input type="submit" name="modifierMedecinD" value="Enregistrer">
+    </td>
+    </tr>
+    </table>
     ';
   }
   $contenuModifLogMotMD .= '</fieldset></form>';
+  require_once('vue/gabarit/gabaritDirecteur.php');
+}
+
+function afficherTousLesPieces($piece)
+{
+  $afficherTousLesPieces = '<form method="POST" action="site.php"> 
+  <fieldset> <legend> Tous les pièces</legend>
+  ';
+  // foreach ($piece as $ligne) {
+  //   $afficherTousLesPieces .= '<p>
+  //   <input type="checkbox" name="checkbox_piece" value="' . $ligne->LibellePi . '"><label>' . $ligne->LibellePi . '</label>
+
+  // </p>';
+  // }
+  $afficherTousLesPieces .= '<p>
+  <select name="choisirLesPieces[]" multiple onchange="ValideSelectBox(this)">
+  ';
+  foreach ($piece as $ligne) {
+    $afficherTousLesPieces .= '
+  <option value="' . $ligne->LibellePi . '">' . $ligne->LibellePi . '</option>
+  ';
+  }
+
+  $afficherTousLesPieces .= '</select></p>
+
+  <p>Vous avez selectioné:</p>
+
+  <div id="resultPiece"></div>
+
+  ';
+
+  $afficherTousLesPieces .= '</fieldset></form>
+  ';
   require_once('vue/gabarit/gabaritDirecteur.php');
 }

@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<!-- <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestion Page Directeur</title>
+  <script src="vue/fichier.js" text="text/javascript">
+
+  </script>
+</head> -->
+
+<head>
+  <title>Bootstrap Exemple (Modifier après)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="vue/fichier.js" text="text/javascript"></script>
 </head>
+
+
 
 <body>
   <h1>
@@ -43,10 +58,20 @@
     <fieldset>
       <legend>Afficher Information d'Agent</legend>
       <p>
-        Cliquez sur la bouton "Afficher". Pour afficher tous les informations d'agent.
+        Cliquez sur la bouton "Afficher". Pour afficher tous les informations d'un agent.
       </p>
       <p>
         <input type="submit" name="afficherPersonnelAD" value="Afficher">
+      </p>
+    </fieldset>
+  </form>
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>Afficher Information Médecin</legend>
+      <p>
+        Cliquez sur la bouton "Afficher". Pour afficher tous les informations d'un médecin </p>
+      <p>
+        <input type="submit" name="afficherPersonnelMD" value="Afficher">
       </p>
     </fieldset>
   </form>
@@ -55,18 +80,22 @@
     echo $contenuPersonnelAD;
   }
   ?>
+  <?php
+  if (!empty($contenuPersonnelMD)) {
+    echo $contenuPersonnelMD;
+  }
+  ?>
+
   <form action="site.php" method="POST">
     <fieldset>
-      <legend>Modifier Information d'Agent</legend>
+      <legend>Modifier les renseignements sur l’agent ou le médecin</legend>
       <p>
-        Pour modifier les renseignements d’un agent. Veuillez entrer son ID pour effectuer le changement.<br>
+        Pour modifier les renseignements. Veuillez entrer son ID pour effectuer le changement.<br>
         <i>Si vous ne connaissez pas le numéro ID d’agent, cliquez sur le bouton Afficher dans la formule ci-dessus pour le trouver.</i>
       </p>
       <p>
-      </p>
-      <p>
-        <label>ID: </label><input type="text" name="idPersonnelAD">
-        <input type="submit" name="modifInforPersonnelAD" value="Valider">
+        <label>ID: </label><input type="text" name="idPersonnelD">
+        <input type="submit" name="modifInforPersonnelD" value="Valider">
       </p>
     </fieldset>
   </form>
@@ -76,29 +105,53 @@
     echo $contenuModifLogMotAD;
   }
   ?>
-  <form action="site.php" method="POST">
-    <fieldset>
-      <legend>Modifier Information Du Médecin</legend>
-      <p>
-        Pour modifier le login et mot de passe des médecins. Tapez sur la bouton "Afficher"
-      </p>
-      <p>
-        <input type="submit" name="afficherPersonnelMD" value="Afficher">
-      </p>
-    </fieldset>
-  </form>
-
-  <?php
-  if (!empty($contenuPersonnelMD)) {
-    echo $contenuPersonnelMD;
-  }
-  ?>
 
   <?php
   if (!empty($contenuModifLogMotMD)) {
     echo $contenuModifLogMotMD;
   }
   ?>
+  <?php
+  if (!empty($afficherModifierSucess)) {
+    echo  $afficherModifierSucess;
+  }
+  ?>
+
+  <form action="site.php" method="POST" id="form6">
+    <fieldset>
+      <legend>
+        Créer un motif RDV
+      </legend>
+      <p>
+        <label for="">Nom motif:</label>
+        <input type="text" name="nomMotif">
+      </p>
+      <p>
+        <label for=""> Prix motif:
+        </label>
+        <input type="text" name="prixMotif">
+      </p>
+      <p>
+        <i>Veuillez cliquer sur la bouton "Afficher" pour afficher tous les pièces. Ensuite, Vous choisissez les pièces qui corespondent à chaque motif. </i>
+        <input type="submit" name="afficherPiece" value="Afficher">
+        <?php
+        if (!empty($afficherTousLesPieces)) {
+          echo  $afficherTousLesPieces;
+        }
+        ?>
+      </p>
+      <p>
+        <input type="submit" name="validerMotif" value="Valider">
+      </p>
+    </fieldset>
+  </form>
+  <?php
+  if (!empty($afficherCreerMotifSucess)) {
+    echo $afficherCreerMotifSucess;
+  }
+  ?>
+
+
 </body>
 
 </html>

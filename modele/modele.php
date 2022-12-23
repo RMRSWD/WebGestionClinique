@@ -14,7 +14,7 @@ function checkUser($login, $mdp)
   $connexion = getConnect();
   $requete = "SELECT * FROM gestionconnect WHERE login='$login' AND mdp='$mdp'";
   $resultat = $connexion->query($requete);
-  $resultat->setFetchMode(PDO::FETCH_OBJ);
-  $check = $resultat->fetch();
+  $resultat->setFetchMode(PDO::FETCH_OBJ); //on veut que le résultat soit récupérable sous forme d'objet
+  $check = $resultat->fetch(); //le méthode fetch fonctionne comme un curseur qui extrait objet par objet à partir du résultat total
   return $check;
 }

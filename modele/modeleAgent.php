@@ -30,13 +30,7 @@ function chercherUnPatient($nom, $prenom)
 //   $resultat->closeCursor();
 // }
 
-function UpdateNomClient($nom)
-{
-  $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET nom='$nom'";
-  $resultat = $connexion->query($requete);
-  $resultat->closeCursor();
-}
+
 
 function recupererNomPrenomAgent($login, $mdp)
 {
@@ -48,45 +42,10 @@ function recupererNomPrenomAgent($login, $mdp)
   return $recupererNomPrenom;
 }
 
-function UpdatePrenomClient($prenom)
+function UpdateInforPatient($idPatient, $nomPatient, $prenomPatient, $nssPatient, $datenaissancePatient, $adressePatient, $numtelPatient, $departementPatient, $soldePatient)
 {
   $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET prenom='$prenom'";
-  $resultat = $connexion->query($requete);
-  $resultat->closeCursor();
-}
-function UpdateNssClient($nss)
-{
-  $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET nss='$nss'";
-  $resultat = $connexion->query($requete);
-  $resultat->closeCursor();
-}
-function UpdateDateNaissanceClient($datedenaissance)
-{
-  $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET datenaissance='$datedenaissance'";
-  $resultat = $connexion->query($requete);
-  $resultat->closeCursor();
-}
-function UpdateAdresseClient($adresse)
-{
-  $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET adresse='$adresse'";
-  $resultat = $connexion->query($requete);
-  $resultat->closeCursor();
-}
-function UpdateNumtelClient($numtel)
-{
-  $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET numtel='$numtel'";
-  $resultat = $connexion->query($requete);
-  $resultat->closeCursor();
-}
-function  UpdateDepartementClient($departementdenaissance)
-{
-  $connexion = getConnect();
-  $requete = "UPDATE informationpatient SET departementnaissance='$departementdenaissance'";
+  $requete = "UPDATE informationpatient SET id='$idPatient', nom='$nomPatient', prenom='$prenomPatient', nss='$nssPatient', datenaissance='$datenaissancePatient', adresse='$adressePatient', numtel='$numtelPatient', departementnaissance = '$departementPatient', solde='$soldePatient' WHERE id='$idPatient'";
   $resultat = $connexion->query($requete);
   $resultat->closeCursor();
 }

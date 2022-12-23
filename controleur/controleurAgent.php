@@ -45,10 +45,19 @@ function CtlChercherUnPatient($nom, $prenom)
 //   }
 // }
 
-function CtlModifierNomClient($nom)
+function CtlAfficherFormuleModifierInforPatient($idPatient, $nomPatient, $prenomPatient, $nssPatient, $datenaissancePatient, $adressePatient, $numtelPatient, $departementPatient, $soldePatient)
 {
-  if (!empty($nom)) {
-    UpdateNomClient($nom);
+  if (!empty($idPatient) || !empty($nomPatient) || !empty($prenomPatient) || !empty($nssPatient) || !empty($datenaissancePatient) || !empty($adressePatient) || !empty($numtelPatient) || !empty($departementPatient) || !empty($soldePatient)) {
+    UpdateInforPatient($idPatient, $nomPatient, $prenomPatient, $nssPatient, $datenaissancePatient, $adressePatient, $numtelPatient, $departementPatient, $soldePatient);
+    affchierModifierAvecSucess();
+  } else {
+    throw new Exception("Invalide syntex. Erreur ici");
+  }
+}
+function CtlModifierNomClient($nom, $idPatient)
+{
+  if (!empty($nom) && !empty($idPatient)) {
+    UpdateNomClient($nom, $idPatient);
     affchierModifierAvecSucess();
   } else {
     throw new Exception("Invalide syntex");
@@ -116,7 +125,7 @@ function CtlDeconnexionAgent()
   deconnexionAgent();
 }
 
-function CtlErreurNumber()
-{
-  afficherErreurNumber();
-}
+// function CtlErreurNumber()
+// {
+//   afficherErreurNumber();
+// }

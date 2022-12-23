@@ -35,37 +35,18 @@ try {
     $nom = $_POST["nom"];
     $prenom = $_POST["prenom"];
     CtlChercherUnPatient($nom, $prenom);
-  } else if (isset($_POST["validernom"])) {
-    $nom = $_POST["modifiernom"];
-    CtlModifierNomClient($nom);
-  } else if (isset($_POST["validerprenom"])) {
-    $prenom = $_POST["modifierprenom"];
-    CtlModifierPrenomClient($prenom);
-  } else if (isset($_POST["validernss"])) {
-    $nss = $_POST["modifiernss"];
-    CtlModifierNssClient($nss);
-  } else if (isset($_POST["validerdatenaissance"])) {
-    $datedenaissance = $_POST["modifierdatenaissance"];
-    CtlModifierDateNaissanceClient($datedenaissance);
-  } else if (isset($_POST["valideradresse"])) {
-    $adresse = $_POST["modifieradresse"];
-    CtlModifierAdresseClient($adresse);
-  } else if (isset($_POST["validernumtel"])) {
-    if (is_numeric($_POST["modifiernumtel"])) {
-      $numtel = $_POST["modifiernumtel"];
-      CtlModifierNumtelClient($numtel);
-    } else {
-      CtlErreurNumber();
-    }
-  } else if (isset($_POST["validerdepartement"])) {
-    $departementdenaissance = $_POST["modifierdepartement"];
-    CtlModifierDepartementClient($departementdenaissance);
+  } else if (isset($_POST["modifierInforPatient"])) {
+    $idPatient = $_POST["idPatient"];
+    $nomPatient = $_POST["nomPatient"];
+    $prenomPatient = $_POST["prenomPatient"];
+    $nssPatient = $_POST["nssPatient"];
+    $datenaissancePatient = $_POST["datenaissancePatient"];
+    $adressePatient = $_POST["adressePatient"];
+    $numtelPatient = $_POST["numtelPatient"];
+    $departementPatient = $_POST["departementPatient"];
+    $soldePatient = $_POST["soldePatient"];
+    CtlAfficherFormuleModifierInforPatient($idPatient, $nomPatient, $prenomPatient, $nssPatient, $datenaissancePatient, $adressePatient, $numtelPatient, $departementPatient, $soldePatient);
   }
-
-
-
-
-
 
 
   //page de directeur
@@ -78,25 +59,53 @@ try {
     CtlAfficherInformationAgent();
   } else if (isset($_POST["afficherPersonnelMD"])) {
     CtlAfficherInformationMedecin();
-  } else if (isset($_POST["modifInforPersonnelAD"])) {
-    $idPersonnelAD = $_POST["idPersonnelAD"];
-    CtlModifierInforAgentD($idPersonnelAD);
+  } else if (isset($_POST["modifInforPersonnelD"])) {
+    $idPersonnelD = $_POST["idPersonnelD"];
+    CtlModifierInforD($idPersonnelD);
   }
-  //elseif(){
-  //Commencer modifier les information d'agent
-  //}
+  //modifier infor agent et medecin
+
+  else if (isset($_POST["modifierAgentD"])) {
+    $idAgent = $_POST["idAgent"];
+    $loginAgent = $_POST["loginAgent"];
+    $mdpAgent = $_POST["mdpAgent"];
+    $nomAgent = $_POST["nomAgent"];
+    $prenomAgent = $_POST["prenomAgent"];
+    CtlModifierInforAD($idAgent, $loginAgent, $mdpAgent, $nomAgent, $prenomAgent);
+  } else if (isset($_POST["modifierMedecinD"])) {
+    $idMedecin = $_POST["idMedecin"];
+    $loginMedecin = $_POST["loginMedecin"];
+    $mdpMedecin = $_POST["mdpMedecin"];
+    $nomMedecin = $_POST["nomMedecin"];
+    $prenomMedecin = $_POST["prenomMedecin"];
+    CtlModifierInforMD($idMedecin, $loginMedecin, $mdpMedecin, $nomMedecin, $prenomMedecin);
+  }
+
+  // Créer un motif 
+
+  else if (isset($_POST["afficherPiece"])) {
+    CtlAfficherTousPieces();
+  } else if (isset($_POST["validerMotif"])) {
+    $nomMotif = $_POST["nomMotif"];
+    $prixMotif = $_POST["prixMotif"];
+    $choisirLesPieces = "";
+    foreach ($_POST["choisirLesPieces"] as $element) {
+      if (empty($element)) {
+        echo "pas d'élément";
+      } else {
+        $choisirLesPieces = $element;
+        CtlCreerMotifD($nomMotif, $prixMotif, $choisirLesPieces);
+      }
+      // for ($i = 0; $i < $nombreElement; $i++) {
+      //   echo $element[$i];
+      // }
+    }
+    echo $choisirLesPieces;
 
 
-
-  // $nom = $_POST["modifiernom"];
-  // $prenom = $_POST["modifierprenom"];
-  // $nss = $_POST["modifiernss"];
-  // $datedenaissance = $_POST["modifierdatenaissance"];
-  // $adresse = $_POST["modifieradresse"];
-  // $numtel = $_POST["modifiernumtel"];
-  // $departementdenaissance = $_POST["modifierdepartement"];
-  // CtlModifierInformationClient($nom, $prenom, $nss, $datedenaissance, $adresse, $numtel, $departementdenaissance);
-  else {
+    // $choisirLesPieces = $_POST["choisirLesPieces"];
+    // echo $choisirLesPieces;
+  } else {
     ctlAcceuille();
   }
 } catch (Exception $e) {

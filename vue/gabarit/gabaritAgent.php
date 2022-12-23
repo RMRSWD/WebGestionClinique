@@ -59,14 +59,11 @@
           <option value="Toulouse">Toulouse</option>
           <option value="" name="saisirEtranger" onclick="saisirPaysEtranger('saisirPaysEtranger')">99 </option>
         </select>
-      <p id="saisirPaysEtranger">
-
+      <p id="saisirPaysEtranger"></p>
+      </p>
       <p>
         <label for="">Solde du patient: </label>
         <input type="text" name="deposer">
-      </p>
-
-      </p>
       </p>
       <p>
         <input type="submit" value="Créer un patient" name="creerunpatient">
@@ -138,6 +135,47 @@
     echo $affichersynthesepatient;
   }
   ?>
+
+
+
+
+  <form action="site.php" medthod="POST" name="form4">
+    <fieldset>
+      <legend> Prend un RDV </legend>
+      <p>
+        <label for="">Nom du médicin</label>
+        <input type="text" name="nommedicin" value="">
+      </p>
+      <p>
+        <label for="">Prénom du médicin</label>
+        <input type="text" name="prenommedicine" value="">
+      </p>
+      <p>
+        Choisi Specialité </br>
+        <select name="specialite" id="Specialite">
+          <option value="Specialie1" name="Specialie1">Specialité A</option>
+          <option value="Specialie2" name="Specialie2">Specialité B</option>
+          <option value="Specialie3" name="Specialie3">Specialité C</option>
+        </select>
+      </p>
+      <p>Jour et heure<br>
+        <input type="datetime-local" name="datetime"><br>
+      </p>
+      <p><input type="submit" value="check" name="check"></p>
+
+
+  </form>
+  <form action="site.php" medthod="POST" name="form5">
+    <p> Motif </br>
+      <select name="motif" id="motif">
+        <option name="consultation" value="Consultation" onclick="consultation('consultation')">Premier Consultation</option>
+        <option name="biopsie" id="Biopsie" onclick="biopsie('biopsie')">Biopsie</option>
+      </select>
+    </p>
+    <p><input type="button" value="prendrdv" name="prendrdv"></p>
+    </fieldset>
+
+  </form>
 
 
 
