@@ -14,24 +14,35 @@ function saisirPaysEtranger(n) {
 // }
 
 
-function ValideSelectBox(obj){
+// function ValideSelectBox(obj){
 
 
-  var options = obj.children; 
-
-  
-  var html = '';
+//   var options = obj.children; 
 
   
-  for(var i = 0; i < options.length; i++){
-    if(options[i].selected){
-      html += ' <li>'+options[i].value+ '</li> ';
+//   var html = '';
 
-    }
+  
+//   for(var i = 0; i < options.length; i++){
+//     if(options[i].selected){
+//       html += ' <li>'+options[i].value+ '</li> ';
 
+//     }
+
+//   }
+//   document.getElementById("resultPiece").innerHTML = html;
+
+// }
+
+
+function nbPiece() {
+  ch = "";
+  // var nbPiece_Array =[];
+  for (i = 0; i < document.forms["form6"].elements["z1"].value; i++) {
+    ch = ch + '  <p>Piece '+Number(i+1)+': <input type="text" name="nomPieceFournit[]" id=""></p>';
+    // nbPiece_Array.push(document.forms["form6".elements["nomPieceFournit"].value]);
   }
-  document.getElementById("resultPiece").innerHTML = html;
-
+  document.getElementById("f2").innerHTML = ch;
 }
 
 

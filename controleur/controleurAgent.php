@@ -2,10 +2,12 @@
 require_once('vue/vue_/vueAgent.php');
 require_once('modele/modeleAgent.php');
 
+
 function CtlAccueilAgent()
 {
   $nom = $_SESSION['agentAcceuil']->nomP;
   $prenom = $_SESSION['agentAcceuil']->prenomP;
+  // afficherAcceuilleAgent($nom, $prenom);
   afficherAcceuilleAgent($nom, $prenom);
 }
 // function  CtlNomPrenom($login, $mdp)
@@ -54,72 +56,72 @@ function CtlAfficherFormuleModifierInforPatient($idPatient, $nomPatient, $prenom
     throw new Exception("Invalide syntex. Erreur ici");
   }
 }
-function CtlModifierNomClient($nom, $idPatient)
-{
-  if (!empty($nom) && !empty($idPatient)) {
-    UpdateNomClient($nom, $idPatient);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
+// function CtlModifierNomClient($nom, $idPatient)
+// {
+//   if (!empty($nom) && !empty($idPatient)) {
+//     UpdateNomClient($nom, $idPatient);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
 
-function CtlModifierPrenomClient($prenom)
-{
-  if (!empty($prenom)) {
-    UpdatePrenomClient($prenom);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
+// function CtlModifierPrenomClient($prenom)
+// {
+//   if (!empty($prenom)) {
+//     UpdatePrenomClient($prenom);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
 
-function CtlModifierNssClient($nss)
-{
-  if (!empty($nss)) {
-    UpdateNssClient($nss);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
-function CtlModifierDateNaissanceClient($datedenaissance)
-{
-  if (!empty($datedenaissance)) {
-    UpdateDateNaissanceClient($datedenaissance);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
+// function CtlModifierNssClient($nss)
+// {
+//   if (!empty($nss)) {
+//     UpdateNssClient($nss);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
+// function CtlModifierDateNaissanceClient($datedenaissance)
+// {
+//   if (!empty($datedenaissance)) {
+//     UpdateDateNaissanceClient($datedenaissance);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
 
-function CtlModifierAdresseClient($adresse)
-{
-  if (!empty($adresse)) {
-    UpdateAdresseClient($adresse);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
-function CtlModifierNumtelClient($numtel)
-{
-  if (!empty($numtel)) {
-    UpdateNumtelClient($numtel);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
-function CtlModifierDepartementClient($departementdenaissance)
-{
-  if (!empty($departementdenaissance)) {
-    UpdateDepartementClient($departementdenaissance);
-    affchierModifierAvecSucess();
-  } else {
-    throw new Exception("Invalide syntex");
-  }
-}
+// function CtlModifierAdresseClient($adresse)
+// {
+//   if (!empty($adresse)) {
+//     UpdateAdresseClient($adresse);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
+// function CtlModifierNumtelClient($numtel)
+// {
+//   if (!empty($numtel)) {
+//     UpdateNumtelClient($numtel);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
+// function CtlModifierDepartementClient($departementdenaissance)
+// {
+//   if (!empty($departementdenaissance)) {
+//     UpdateDepartementClient($departementdenaissance);
+//     affchierModifierAvecSucess();
+//   } else {
+//     throw new Exception("Invalide syntex");
+//   }
+// }
 function CtlDeconnexionAgent()
 {
   deconnexionAgent();

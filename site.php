@@ -52,9 +52,10 @@ try {
   //page de directeur
 
   else if (isset($_POST["validernewlogin"])) {
+    $genre = $_POST["genre"];
     $creelogin = $_POST["creelogin"];
     $creemdp = $_POST["creepassword"];
-    CtrCreerNewLogin($creelogin, $creemdp);
+    CtrCreerNewLogin($genre, $creelogin, $creemdp);
   } else if (isset($_POST["afficherPersonnelAD"])) {
     CtlAfficherInformationAgent();
   } else if (isset($_POST["afficherPersonnelMD"])) {
@@ -79,32 +80,85 @@ try {
     $nomMedecin = $_POST["nomMedecin"];
     $prenomMedecin = $_POST["prenomMedecin"];
     CtlModifierInforMD($idMedecin, $loginMedecin, $mdpMedecin, $nomMedecin, $prenomMedecin);
+  } else if (isset($_POST["modifierDirecteur"])) {
+
+    $idDirecteur = $_POST["idDirecteur"];
+    $loginDirecteur = $_POST["loginDirecteur"];
+    $mdpDirecteur = $_POST["mdpDirecteur"];
+    $nomDirecteur = $_POST["nomDirecteur"];
+    $prenomDirecteur = $_POST["prenomDirecteur"];
+    CtlModifierInforDirecteur($idDirecteur, $loginDirecteur, $mdpDirecteur, $nomDirecteur, $prenomDirecteur);
   }
+
+
 
   // Créer un motif 
 
-  else if (isset($_POST["afficherPiece"])) {
-    CtlAfficherTousPieces();
-  } else if (isset($_POST["validerMotif"])) {
+  else if (isset($_POST["validerMotif"])) {
     $nomMotif = $_POST["nomMotif"];
     $prixMotif = $_POST["prixMotif"];
-    $choisirLesPieces = "";
-    foreach ($_POST["choisirLesPieces"] as $element) {
+    $nomPieceFournit = "";
+    //$nomPieceFournit = $_POST["nomPieceFournit"];
+    CtlCreerNouveauMotif($nomMotif, $prixMotif);
+    foreach ($_POST["nomPieceFournit"] as $element) {
       if (empty($element)) {
         echo "pas d'élément";
       } else {
-        $choisirLesPieces = $element;
-        CtlCreerMotifD($nomMotif, $prixMotif, $choisirLesPieces);
+        $nomPieceFournit = $element;
+        CtlCreerMotifD($nomMotif, $nomPieceFournit);
       }
-      // for ($i = 0; $i < $nombreElement; $i++) {
-      //   echo $element[$i];
-      // }
     }
-    echo $choisirLesPieces;
+  } else if (isset($_POST["validerIDMotif"])) {
+    $idMotif = $_POST["idMotif"];
+    CtlAfficherModifierIdMotif($idMotif);
+  } else if (isset($_POST["modifierMotifD"])) {
+    $idMotif = $_POST["idMotif"];
+    $libelleMotif = $_POST["libelleMotif"];
+    $prixMotif = $_POST["prixMotif"];
+    $nomPieceModifD = "";
+    //CtlUpdateMotif($idMotif, $libelleMotif, $prixMotif);
 
 
-    // $choisirLesPieces = $_POST["choisirLesPieces"];
-    // echo $choisirLesPieces;
+    // $arrlength = count($_POST["idPieceModifD"]);
+    // echo $arrlength;
+    $ids = $_POST["idPieceModifD"];
+    $noms = $_POST["nomPieceModifD"];
+
+    // for ($x = 0; $x < $arrlength; $x++) {
+    //   $idPieceModifD = $ids[$x];
+    //   $nomPieceModifD = $noms[$x];
+    //   echo $idPieceModifD;
+    //   CtlUpdatePiece($idPieceModifD, $nomPieceModifD);
+    // }
+
+
+    foreach ($ids as $key => $value) {
+      // echo "The index is = " . $key . ", and value is = " . $value . "and nom =" . $noms[$key];
+      // echo "\n";
+      CtlUpdatePiece($value, $noms[$key]);
+    }
+
+    // foreach ($_POST["idPieceModifD"] as $idPiece) {
+    // echo $idPiece;
+    //$nomPieceModifD = $nomPiece;
+    // $idPieceModifD = $idPiece;
+    // $nomPieceModifD = $_POST["nomPieceModifD"];
+    // CtlUpdatePiece($idPieceModifD, $nomPieceModifD);
+    // }
+
+    // CtlUpdateMotif($idMotif, $libelleMotif, $prixMotif);
+  } else if (isset($_POST["supprimerMotif"])) {
+    $libelleMotifSD = $_POST["libelleMotifSD"];
+    CtlSupprimerMotif($libelleMotifSD);
+  } else if (isset($_POST["ValiderCreerUnMedecin"])) {
+    $numMedecin = $_POST["numMedecin"];
+    $nomMedecin = $_POST["nomMedecin"];
+    $prenomMedecin = $_POST["prenomMedecin"];
+    $specialiteMedecin = $_POST["specialiteMedecin"];
+    CtlCreerNomPrenomSpecialiteMedecin($numMedecin, $nomMedecin, $prenomMedecin, $specialiteMedecin);
+  } else if (isset($_POST['supprimerMedecin'])) {
+    $id_MedecinSupprimer = $_POST['id_MedecinSupprimer'];
+    CtlSupprimerMedecin($id_MedecinSupprimer);
   } else {
     ctlAcceuille();
   }

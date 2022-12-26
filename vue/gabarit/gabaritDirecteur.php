@@ -25,7 +25,10 @@
 
 <body>
   <h1>
-    <?php echo "Bienvenue sur la page directeur " . $nom . " " . $prenom;
+    <?php
+
+    echo "Bienvenue sur la page directeur " . $nom . " " . $prenom;
+
     ?>
   </h1>
   <form action="site.php" method="POST">
@@ -35,7 +38,18 @@
 
   <form action="site.php" method="POST">
     <fieldset>
-      <legend>Crée un login et mot de passe pour le médecin</legend>
+      <legend>Crée un login et mot de passe pour le médecin l'agent et directeur</legend>
+      <p>
+      <p>
+        <i>Vous choisissez un des trois genre
+          <li>M -> Médecin</li>
+          <li>A -> Agent</li>
+          <li>D -> Directeur</li>
+        </i>
+      </p>
+      <label for="">Genre: </label>
+      <input type="text" name="genre">
+      </p>
       <p>
         <label for="">Login: </label>
         <input type="text" name="creelogin">
@@ -65,6 +79,11 @@
       </p>
     </fieldset>
   </form>
+  <?php
+  if (!empty($contenuPersonnelAD)) {
+    echo $contenuPersonnelAD;
+  }
+  ?>
   <form action="site.php" method="POST">
     <fieldset>
       <legend>Afficher Information Médecin</legend>
@@ -75,11 +94,7 @@
       </p>
     </fieldset>
   </form>
-  <?php
-  if (!empty($contenuPersonnelAD)) {
-    echo $contenuPersonnelAD;
-  }
-  ?>
+
   <?php
   if (!empty($contenuPersonnelMD)) {
     echo $contenuPersonnelMD;
@@ -88,7 +103,7 @@
 
   <form action="site.php" method="POST">
     <fieldset>
-      <legend>Modifier les renseignements sur l’agent ou le médecin</legend>
+      <legend>Modifier les renseignements sur l’agent ou le médecin et le directeur</legend>
       <p>
         Pour modifier les renseignements. Veuillez entrer son ID pour effectuer le changement.<br>
         <i>Si vous ne connaissez pas le numéro ID d’agent, cliquez sur le bouton Afficher dans la formule ci-dessus pour le trouver.</i>
@@ -112,6 +127,12 @@
   }
   ?>
   <?php
+  if (!empty($contenuModifLogMotD)) {
+    echo $contenuModifLogMotD;
+  }
+  ?>
+
+  <?php
   if (!empty($afficherModifierSucess)) {
     echo  $afficherModifierSucess;
   }
@@ -131,15 +152,15 @@
         </label>
         <input type="text" name="prixMotif">
       </p>
-      <p>
-        <i>Veuillez cliquer sur la bouton "Afficher" pour afficher tous les pièces. Ensuite, Vous choisissez les pièces qui corespondent à chaque motif. </i>
-        <input type="submit" name="afficherPiece" value="Afficher">
-        <?php
-        if (!empty($afficherTousLesPieces)) {
-          echo  $afficherTousLesPieces;
-        }
-        ?>
+      <!-- <p>
+        <label for="">Piece fournit: </label>
+      <p>Indiquez le nombre piece fournit pour ce motif</p>
+      <input type="text" name="nombrePiece"> -->
+      <p><label for="">Donnez nombre pièce fournit:</label> <input type="text" name="z1" />
+        <input type="button" value="Executer" onclick="nbPiece()" />
       </p>
+
+      <div id="f2"></div>
       <p>
         <input type="submit" name="validerMotif" value="Valider">
       </p>
@@ -150,6 +171,117 @@
     echo $afficherCreerMotifSucess;
   }
   ?>
+
+  <form action="site.php" method="POST" name="form7">
+    <fieldset>
+      <legend>Modifier Motif RDV</legend>
+      <p>
+        Veuillez saisir un ID du motif RDV pour effectuer le modifier
+      </p>
+      <p>
+        <label for="">ID Motif: </label>
+        <input type="text" name="idMotif" value="">
+        <input type="submit" name="validerIDMotif" value="Valider">
+      </p>
+    </fieldset>
+
+  </form>
+  <?php
+  if (!empty($afficherModifierMotif)) {
+    echo $afficherModifierMotif;
+  }
+  ?>
+  <!-- <?php
+        // if (!empty($afficherModifierPieceMotif)) {
+        //   echo $afficherModifierPieceMotif;
+        // }
+        ?> -->
+
+
+
+  <?php
+  if (!empty($afficherModifierMotifSucess)) {
+    echo $afficherModifierMotifSucess;
+  }
+  ?>
+
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>Supprimer Un Motif</legend>
+      <p>
+        Veuillez saisir la libelle du motif rendez-vous pour effectuer le supprimer
+      </p>
+      <p>
+        <label for="">Libelle Motif: </label>
+        <input type="text" name="libelleMotifSD" value="">
+        <input type="submit" name="supprimerMotif" value="Valider   ">
+      </p>
+    </fieldset>
+  </form>
+
+  <?php
+  if (!empty($afficherSupprimerMotifSucess)) {
+    echo $afficherSupprimerMotifSucess;
+  }
+  ?>
+
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>Créer nom , prénom et sprécialité d'un médecin</legend>
+      <p>
+        <i>Veuillez fournir un ID de médecin. Cette partie associent aux login et mot de passe que vous avez créés précédemment.</i></br>
+        <label for="">Id Médecin: </label>
+        <input type="text" name="numMedecin">
+      </p>
+      </p>
+      <p>
+        <label for="">Nom Médecin: </label>
+        <input type="text" name="nomMedecin">
+      </p>
+      <p>
+        <label for="">Prénom Médecin: </label>
+        <input type="text" name="prenomMedecin">
+      </p>
+      <p>
+        <label for="">Spécialité Médecin: </label>
+        <input type="text" name="specialiteMedecin">
+      </p>
+      <p>
+        <input type="submit" name="ValiderCreerUnMedecin" value="Valider">
+      </p>
+    </fieldset>
+  </form>
+
+  <?php
+  if (!empty($afficherCreerNomPrenomSpecialiteSucess)) {
+    echo $afficherCreerNomPrenomSpecialiteSucess;
+  }
+  ?>
+
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>Supprimer Un Médecin</legend>
+      <p>
+        <i>
+          Veuillez saisir ID de médecin pour effectuer cette action.
+        </i></br>
+      </p>
+      <p>
+        <label for="">ID Médecin:</label>
+        <input type="text" name="id_MedecinSupprimer">
+      </p>
+      <p>
+        <input type="submit" name="supprimerMedecin" value="Supprimer">
+      </p>
+    </fieldset>
+  </form>
+
+  <?php
+  if (!empty($afficherCreerNomPrenomSpecialiteSucess)) {
+    echo $afficherCreerNomPrenomSpecialiteSucess;
+  }
+  ?>
+
 
 
 </body>
