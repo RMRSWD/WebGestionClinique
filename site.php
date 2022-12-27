@@ -48,8 +48,21 @@ try {
     CtlAfficherFormuleModifierInforPatient($idPatient, $nomPatient, $prenomPatient, $nssPatient, $datenaissancePatient, $adressePatient, $numtelPatient, $departementPatient, $soldePatient);
   }
 
+  //PAGE DE MEDECIN
 
-  //page de directeur
+  else if (isset($_POST["reserverLaDate"])) {
+    $dateRDVAdmin = $_POST["dateRDVAdmin"];
+    $libelleRDVAdmin = $_POST["LibelleRDVAdmin"];
+    CtlCreerRDVAdministratif($dateRDVAdmin, $libelleRDVAdmin);
+  } else if (isset($_POST["validerBloquerCreneau"])) {
+    $ChampBloqueCreneau = $_POST["ChampBloqueLesCreneaux"];
+    foreach ($ChampBloqueCreneau as $valeur) {
+      CtlBloquerCreneauMedecin($valeur);
+    }
+  }
+
+
+  //PAGE DE DIRECTEUR
 
   else if (isset($_POST["validernewlogin"])) {
     $genre = $_POST["genre"];

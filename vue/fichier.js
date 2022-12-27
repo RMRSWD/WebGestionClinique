@@ -45,6 +45,22 @@ function nbPiece() {
   document.getElementById("f2").innerHTML = ch;
 }
 
+// function CreerChampBloquer(){
+function CreerChampBloquer(){
+  champBloquer = "";
+  var nbChamp = document.forms["form3"].elements["nbCreneaux"].value;
+  // var nbChamp = document.getElementById("nbCreaneaux").value;
+  if( nbChamp < 10){
+    for(i=0 ; i<nbChamp;i++){
+      champBloquer = champBloquer + '<p>Créneau'+Number(i+1)+' <input type="datetime-local" name="ChampBloqueLesCreneaux[]"></p>';
+    }
+    document.getElementById("nouveauChampBloquerCreneau").innerHTML = champBloquer;
+    document.getElementById("champValideBloqueCreneau").innerHTML = '<p><input type="submit" name="validerBloquerCreneau" value="Bloquer"></p>'
+  }
+  else{
+    alert("votre chiffre doit être inférieur 10. Veuillez re-saisir.");
+  }
+}
 
 
 
