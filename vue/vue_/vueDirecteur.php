@@ -40,7 +40,7 @@ function affficherModifierSucess()
 function afficherCreerMotifSucess()
 {
   $afficherCreerMotifSucess = '<script>
-  alert("Un motif de rendez-vous est bien créé et enregistré");
+  alert("Un motif avec les congines de rendez-vous est bien créé et enregistré");
   </script>';
   require_once('vue/gabarit/gabaritDirecteur.php');
 }

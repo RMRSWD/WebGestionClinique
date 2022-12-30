@@ -25,6 +25,17 @@
       <legend>Préparer un RDV Administratif</legend>
 
       <p>
+        <label for="">Nom du médecin:</label>
+        <input type="text" name="nomMedecinReserver">
+
+      </p>
+      <p>
+        <label for="">Prénom de médecin</label>
+        <input type="text" name="prenomMedecin">
+
+      </p>
+
+      <p>
         <label for="">Date RDV Admin : </label>
         <input type="datetime-local" name="dateRDVAdmin">
       </p>

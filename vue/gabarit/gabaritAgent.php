@@ -82,9 +82,9 @@
 
   <form action="site.php" method="POST" name="form2">
     <fieldset>
-      <legend>Modifier les informations du patient</legend>
+      <legend>Rechercher ou Modifier les informations du patient</legend>
       <form action="site.php" method="POST">
-        <p>Pour trouver et modifier un patient saisir nom et prénom et taper "Chercher".</p>
+        <p>Pour rechercher ou modifier un patient saisir nom et prénom et taper "Chercher".</p>
         <p>
           <label for="nom">Nom:</label>
           <input type="text" name="nom">
@@ -114,6 +114,36 @@
     echo $afficherErreurChiffre;
   }
   ?>
+  <form action="site.php" method="POST" name="form6">
+    <fieldset>
+      <p>Vous saisissez nom et prénom de patient Ou la date de naissance de patient pour chercher son NSS</p>
+      <i>Attention: Pas mettre les trois champs dans même temp</i>
+      <legend>Chercher NSS d'un patient</legend>
+      <p>
+        <label for="">Nom: </label>
+        <input type="text" name="chercherNomPatient">
+      </p>
+      <p>
+        <label for="">Prénom: </label>
+        <input type="text" name="chercherPrenomPatient">
+      </p>
+      <p>OU</p>
+      <p>
+        <label for="">Date de naissance: </label>
+        <input type="date" name="chercherDateNaissancePatient">
+      </p>
+      <p>
+        <input type="submit" name="validerChercherNSSPatient" value="Chercher">
+      </p>
+    </fieldset>
+
+  </form>
+  <?php
+  if (!empty($afficherNSSPatient)) {
+    echo $afficherNSSPatient;
+  }
+  ?>
+
 
   <form action="site.php" method="POST" name="form3">
     <fieldset>
@@ -139,43 +169,150 @@
 
 
 
-  <form action="site.php" medthod="POST" name="form4">
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>
+        Gestion de dépôt l'argent pour un patient
+      </legend>
+      <p>
+        Saisissez le numéro NSS pour effectuer cette action
+      </p>
+      <p>
+        <label for="">NSS:</label>
+        <input type="text" name="nssDepot">
+      </p>
+      <p>
+        <label for="">Montant</label>
+        <input type="text" name="montantDepot">
+      </p>
+      <input type="submit" name="valideNssDepot" value="Valider">
+    </fieldset>
+  </form>
+
+  <?php
+  if (!empty($afficherAjouterSoldeAvecSuccess)) {
+    echo $afficherAjouterSoldeAvecSuccess;
+  }
+  ?>
+
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>
+        Effectuer le payement
+      </legend>
+      <p>
+        Saisissez ici la libellé du motif RDV pour voir le prix
+      </p>
+      <p>
+        <label for="">Nom Du Motif:</label>
+        <input type="text" name="libelleMotifPayement">
+      </p>
+      <p>
+        <input type="submit" name="validePayementMotifRDV" value="Valider">
+      </p>
+
+    </fieldset>
+  </form>
+
+  <?php
+  if (!empty($afficherPrixMotifRDV)) {
+    echo $afficherPrixMotifRDV;
+  }
+  ?>
+
+  <?php
+  if (!empty($afficherPayerAvecSuccess)) {
+    echo $afficherPayerAvecSuccess;
+  }
+  ?>
+
+  <?php
+  if (!empty($afficherPayementPasSuccess)) {
+    echo $afficherPayementPasSuccess;
+  }
+  ?>
+
+
+  <form action="site.php" method="POST" name="form4">
     <fieldset>
       <legend> Prend un RDV </legend>
       <p>
+        <label for="">Nom du patient</label>
+        <input type="text" name="nomPatientPrendRDV" value="">
+      </p>
+      <p>
+        <label for="">Prénom du patient</label>
+        <input type="text" name="prenomPatientPrendRDV" value="">
+      </p>
+      <p>
         <label for="">Nom du médicin</label>
-        <input type="text" name="nommedicin" value="">
+        <input type="text" name="nomMedicinPrendRDV" value="">
       </p>
       <p>
         <label for="">Prénom du médicin</label>
-        <input type="text" name="prenommedicine" value="">
+        <input type="text" name="prenomMedicinePrendRDV" value="">
       </p>
       <p>
-        Choisi Specialité </br>
-        <select name="specialite" id="Specialite">
-          <option value="Specialie1" name="Specialie1">Specialité A</option>
-          <option value="Specialie2" name="Specialie2">Specialité B</option>
-          <option value="Specialie3" name="Specialie3">Specialité C</option>
-        </select>
+        <label for="">Spécialité du médecin</label>
+        <input type="text" name="specialiteMedecinPrendRDV">
       </p>
-      <p>Jour et heure<br>
-        <input type="datetime-local" name="datetime"><br>
+      <p>Jour et heure <br>
+        <input type="datetime-local" name="datePrendRDV"><br>
       </p>
-      <p><input type="submit" value="check" name="check"></p>
+      <p><input type="submit" name="verifierRDV" value="Vérifier"></p>
+
+      <?php
+      if (!empty($afficherToutMotif)) {
+        echo $afficherToutMotif;
+      }
+      ?>
+      <?php
+      if (!empty($afficherEnregisterSuccess)) {
+        echo $afficherEnregisterSuccess;
+      }
+      ?>
+      <?php
+      if (!empty($afficherPiecesEtConsignes)) {
+        echo $afficherPiecesEtConsignes;
+      }
+      ?>
 
 
-  </form>
-  <form action="site.php" medthod="POST" name="form5">
-    <p> Motif </br>
-      <select name="motif" id="motif">
-        <option name="consultation" value="Consultation" onclick="consultation('consultation')">Premier Consultation</option>
-        <option name="biopsie" id="Biopsie" onclick="biopsie('biopsie')">Biopsie</option>
-      </select>
-    </p>
-    <p><input type="button" value="prendrdv" name="prendrdv"></p>
     </fieldset>
 
   </form>
+  <?php
+  if (!empty($afficherErreurSPPasCorrespondre)) {
+    echo $afficherErreurSPPasCorrespondre;
+  }
+  ?>
+
+
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend> Voir les rendez-vous </legend>
+      <p> Visualier tous les RDV en statut "en attendant de payement". Pour faire cela vous saisissez dans le champ au-dessous le numéro NSS du patient.</p>
+      <p>
+        <label for="">NSS:</label>
+        <input type="text" name="nssRDVEnAttendantPay">
+      </p>
+      <p>
+        <input type="submit" name="validerNSSRDVEnAttendantPay" value="Valider">
+      </p>
+
+    </fieldset>
+  </form>
+  <?php
+  if (!empty($afficherRDVPasPayer)) {
+    echo $afficherRDVPasPayer;
+  }
+  ?>
+
+
+
+
+
+
 
 
 

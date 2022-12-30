@@ -9,10 +9,16 @@ function CtlAcceuilMedecin()
   afficherPageMedecin($nom, $prenom);
 }
 
-function CtlCreerRDVAdministratif($dateRDVAdmin, $motifRDVAdmin)
+function CtlCreerRDVAdministratif($nomMedecin, $prenomMedecin, $dateRDVAdmin, $motifRDVAdmin)
 {
-  if (!empty($dateRDVAdmin) && !empty($motifRDVAdmin)) {
+  if (!empty($dateRDVAdmin) && !empty($motifRDVAdmin) && !empty($nomMedecin) && !empty($prenomMedecin)) {
+    $a = RecupererIdMedecin($nomMedecin, $prenomMedecin);
+    $idMedecin = $a->id;
     CreerUnRDVAdmin($dateRDVAdmin, $motifRDVAdmin);
+    $b = RecupererIdRDVAdministratif($motifRDVAdmin);
+    $idTaAdmin = $b->Id_TacheAdmin;
+    CreerRDVInTravailAdmin($idMedecin, $idTaAdmin);
+
     afficherAjouterAvecSuccessRDVAdmin();
   } else {
     throw new Exception("un champ est invalide");
@@ -22,6 +28,9 @@ function CtlCreerRDVAdministratif($dateRDVAdmin, $motifRDVAdmin)
 function CtlBloquerCreneauMedecin($valeur)
 {
   if (!empty($valeur)) {
+    $a = RecupererIdTaAdmin($valeur);
+    $IdTaAdmin = $a->Id_TacheAdmin;
+    SupprimerInTableTravailAdmin($IdTaAdmin);
     BloquerCreneau($valeur);
     afficherBloquerSuccess();
   } else {

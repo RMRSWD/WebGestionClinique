@@ -26,7 +26,7 @@
 <body>
   <h1>
     <?php
-
+    session_start();
     echo "Bienvenue sur la page directeur " . $nom . " " . $prenom;
 
     ?>
@@ -161,6 +161,13 @@
       </p>
 
       <div id="f2"></div>
+
+      <p><label for="">Donnez nombre consigne:</label> <input type="text" name="z2" />
+        <input type="button" value="Executer" onclick="nbConsigne()" />
+      </p>
+
+      <div id="f3"></div>
+
       <p>
         <input type="submit" name="validerMotif" value="Valider">
       </p>

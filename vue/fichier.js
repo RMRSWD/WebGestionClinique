@@ -45,6 +45,19 @@ function nbPiece() {
   document.getElementById("f2").innerHTML = ch;
 }
 
+function nbConsigne() {
+  ch = "";
+  // var nbPiece_Array =[];
+  for (i = 0; i < document.forms["form6"].elements["z2"].value; i++) {
+    ch = ch + '  <p>Consigne '+Number(i+1)+': <input type="text" name="nomConsigneFournit[]" id=""></p>';
+    // nbPiece_Array.push(document.forms["form6".elements["nomPieceFournit"].value]);
+  }
+  document.getElementById("f3").innerHTML = ch;
+}
+
+
+
+
 // function CreerChampBloquer(){
 function CreerChampBloquer(){
   champBloquer = "";

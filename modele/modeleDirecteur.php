@@ -142,6 +142,31 @@ function CreerNouveauPiece($choisirLesPieces)
   $resultat->closeCursor();
 }
 
+function  CreerNouveauConsigne($nomConsigneFournit)
+{
+  $connexion = getConnect();
+  $requete = "INSERT INTO consigne VALUES(0,'$nomConsigneFournit')";
+  $resultat = $connexion->query($requete);
+  $resultat->closeCursor();
+}
+function RecupererIdConsigne($nomConsigneFournit)
+{
+  $connexion = getConnect();
+  $requete = "SELECT * FROM consigne WHERE LibelleCo='$nomConsigneFournit'";
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $resultatID = $resultat->fetch();
+  $resultat->closeCursor();
+  return $resultatID;
+}
+function CreerNouveauIdMotifEtIdConsigneInTableCM($numMo, $numConsigne)
+{
+  $connexion = getConnect();
+  $requete = "INSERT INTO CM VALUES('$numMo','$numConsigne')";
+  $resultat = $connexion->query($requete);
+  $resultat->closeCursor();
+}
+
 function CreerNouveauIdMotifEtIdPieceInTablePM($numMo, $numPi)
 {
   $connexion = getConnect();
@@ -161,37 +186,6 @@ function RecupererInforInTablePMETMotifEtPiece($idMotif)
   return $resultatInfoModifMotif;
 }
 
-// function RecupererIdPieceInTablePM($idMotif)
-// {
-//   $connexion = getConnect();
-//   $requete = "SELECT Id_Piece FROM PM WHERE Id_Motif='$idMotif'";
-//   $resultat = $connexion->query($requete);
-//   $resultat->setFetchMode(PDO::FETCH_OBJ);
-//   $resultatIDPiece = $resultat->fetchall();
-//   $resultat->closeCursor();
-//   return $resultatIDPiece;
-// }
-// function RecupererNomPieceInTablePiece($id_Piece)
-// {
-//   $connexion = getConnect();
-//   $requete = "SELECT * FROM piece WHERE Id_Piece='$id_Piece'";
-//   $resultat = $connexion->query($requete);
-//   $resultat->setFetchMode(PDO::FETCH_OBJ);
-//   $resultatNomPiece = $resultat->fetchall();
-//   $resultat->closeCursor();
-//   return $resultatNomPiece;
-// }
-
-// function RecupererIdMotifCorres($idMotif)
-// {
-//   $connexion = getConnect();
-//   $requete = "SELECT * FROM motif WHERE Id_Motif='$idMotif'";
-//   $resultat = $connexion->query($requete);
-//   $resultat->setFetchMode(PDO::FETCH_OBJ);
-//   $resultatIDMotif = $resultat->fetchall();
-//   $resultat->closeCursor();
-//   return $resultatIDMotif;
-// }
 
 function UpdateMotif($idMotif, $libelleMotif, $prixMotif)
 {

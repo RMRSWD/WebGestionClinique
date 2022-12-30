@@ -19,106 +19,54 @@ function afficherAjouterAvecSuccess()
   </script>';
   require_once('vue/gabarit/gabaritAgent.php');
 }
-// function afficherPatient($patient)
-// {
-//   $afficherpatient = '<form action="site.php" method= "POST" id="form_modifierinformationpatient"> <fieldset> <legend>Afficher les bases de patient</legend>';
-//   if ($patient == null) {
-//     $afficherpatient .= 'aucune ligne ne repond à votre requete';
-//   } else {
-//     foreach ($patient as $ligne) {
-//       $afficherpatient .= '
-//       <p>
-//       <label for=""> ID Client: </label> <input type="text" name="idPatient" readonly="readonly" value=' . $ligne->id . '></p> 
-//       <p>
-//       <input type="checkbox" onclick="affichernewlignenom(\'newlignenom\')">
-//       <label for="">Nom: ' . $ligne->nom . '</label>
-//       <script>
-//       function affichernewlignenom(n) {
-//         document.getElementById(n).innerHTML += \'<p>Modifier nom: <input type="text" name="modifiernom" value=""></p>\';
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernom" value="Valider"></p> \';
+function afficherErreurPasNumber()
+{
+  $afficherErreurChiffre = '<script> 
+  alert("Veuillez saisir les chiffres pour effectuer cette action. Re-saisir!!!")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
-//       }
-//       </script>
-//       <p id="newlignenom"></p>
-//       </p>
+function afficherAjouterSoldeAvecSuccess()
+{
+  $afficherAjouterSoldeAvecSuccess = '<script> 
+  alert("Ajouter avec success")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
+function afficherPayerAvecSuccess()
+{
+  $afficherPayerAvecSuccess = '<script> 
+  alert("Le payement a effectué avec success.")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
-//   <p>
-//     <input type="checkbox" name="checkprenom" onclick="affichernewligneprenom(\'newligneprenom\')">
-//     <label for="">Prénom:' . $ligne->prenom . ' </label>
-//     <script type="text/javascript">
-//       function affichernewligneprenom(n) {
-//         document.getElementById(n).innerHTML += \'<p>Modifier prénom: <input type="text" name="modifierprenom" value=""></p>\'
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validerprenom" value="Valider"></p> \';
-//       }
-//     </script>
-//   <p id="newligneprenom"></p>
-//   </p>
+function afficherPayementPasSuccess()
+{
+  $afficherPayementPasSuccess = '<script> 
+  alert("Le solde du patient est insuffit pour effectuer cette action.")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
+function afficherErreurSPPasCoresspondre()
+{
+  $afficherErreurSPPasCorrespondre = '<script> 
+  alert("le spécialité du médecin est pas correspondant.Re-saisir le spécialité du médecin.")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
-//       <p><input type="checkbox" name="checknss" onclick="affichernewlignenss(\'newlignenss\')" ><label for="">NSS: ' . $ligne->nss . ' </label>
-//       <script type="text/javascript" >
-//       function affichernewlignenss(n) { 
-//         document.getElementById(n).innerHTML += \'<p>Modifier numéro du sécurité social: <input type="text" name="modifiernss" value=""></p>\';
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernss" value="Valider"></p> \';
-//       }
-//       </script>
-//       <p id="newlignenss"></p>
-//       </p> 
-//       <p><input type="checkbox" name="checkdatenaissance" onclick="affichernewlignedatenaissance(\'newdatenaissance\')" ><label for="">Date de naissance: ' . $ligne->datenaissance . ' </label>
-//       <script type="text/javascript" >
-//       function affichernewlignedatenaissance(n) { 
-//         document.getElementById(n).innerHTML += \'<p>Modifier date de naissance: <input type="date" name="modifierdatenaissance" value=""></p>\';
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validerdatenaissance" value="Valider"></p> \';
+function afficherEnregisterRDVAvecSuccess()
+{
+  $afficherEnregisterSuccess = '<script> 
+  alert("Votre rendez vous pour ce jour a bien enregistré.")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
-//       }
-//       </script>
-//       <p id="newdatenaissance"></p>
-
-//       </p> 
-
-//       <p><input type="checkbox" name="checkadresse" onclick="affichernewligneadresse(\'newligneadresse\')" ><label for="">Adresse: ' . $ligne->adresse . ' </label> 
-//       <script type="text/javascript" >
-//       function affichernewligneadresse(n) { 
-//         document.getElementById(n).innerHTML += \'<p>Modifier adresse: <input type="text" name="modifieradresse" value=""></p>\';
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="valideradresse" value="Valider"></p> \';
-
-//       }
-//       </script>
-//       <p id="newligneadresse"></p>
-
-//       </p> 
-//       <p><input type="checkbox"name="checknumtel" onclick="affichernewlignenumtel(\'newlignenumtel\')"><label for="">Numéro de téléphone:' . $ligne->numtel . ' </label>
-//       <script type="text/javascript" >
-//       function affichernewlignenumtel(n) { 
-//         document.getElementById(n).innerHTML += \'<p>Modifier numéro de téléphone: <input type="text" name="modifiernumtel" id="checknumber" value=""></p>\';
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validernumtel" value="Valider"></p> \';
-//       }
-//       </script>
-
-
-//       <p id="newlignenumtel"></p>
-
-//       </p> 
-
-//       <p><input type="checkbox" name="checkdepartementnaissance" onclick="affichernewlignedepartement(\'newlignedepartement\')" ><label for="">Département de naissance: ' . $ligne->departementnaissance . '</label>
-//       <script type="text/javascript" >
-//       function affichernewlignedepartement(n) { 
-//         document.getElementById(n).innerHTML += \'<p>Modifier département de naissance: <input type="text" name="modifierdepartement" value=""></p>\';
-//         document.getElementById(n).innerHTML += \'<p> <input type="submit" name="validerdepartement" value="Valider"></p> \';
-//       }
-//       </script>
-//       <p id="newlignedepartement"></p>
-
-//       </p> 
-
-//       ';
-//     }
-//   }
-//   $afficherpatient .= '</fieldset></form>';
-
-//   require_once('vue/gabarit/gabaritAgent.php');
-// }
 
 function afficherPatient($patient)
 {
@@ -135,7 +83,7 @@ function afficherPatient($patient)
             </tr>
             <tr>
             <td>ID </td>
-            <td> <input type="text" name="idPatient" readonly="readonly" value="' . $ligne->id . '"> </td>
+            <td> <input type="text" name="idPatient" readonly="readonly" value="' . $ligne->id_Patient . '"> </td>
             </tr>
             <tr>
             <td>Nom </td>
@@ -185,10 +133,185 @@ function affchierModifierAvecSucess()
   require_once('vue/gabarit/gabaritAgent.php');
 }
 
-// function afficherErreurNumber()
-// {
-//   $afficherErreurChiffre = '<script type="text/javascript"> 
-//   alert("Numéro de téléphone est invalide")
-//   </script>';
-//   require_once('vue/gabarit/gabaritAgent.php');
-// }
+
+function afficherSynthesePatient($inforPatient)
+{
+  $affichersynthesepatient = '<form method="POST" action="site.php">
+  <fieldset>
+  <legend>Systhèse d\'un patient</legend>
+  ';
+  foreach ($inforPatient as $ligne) {
+    $affichersynthesepatient .= '
+    <p>
+    <lable>Id Patient:</lable>
+    <input type="text" value="' . $ligne->id_Patient . '" readonly="readonly">
+    </p>
+    <p>
+    <lable>Etat RDV:</lable>
+    <input type="text" value="' . $ligne->etatRDV . '" readonly="readonly"></p>
+    <p>
+    <lable>Libelle RDV:</lable>
+    <input type="text" value="' . $ligne->LibelleMo . '" readonly="readonly"></p>
+    <p>
+    <lable>Date RDV:</lable>
+    <input type="datetime-local" value="' . $ligne->dateRDV . '" readonly="readonly"></p>
+    <p>
+    <lable>IPrix:</lable>
+    <input type="text" value="' . $ligne->PrixMo . '" readonly="readonly"> Euros</p>
+    <lable>Solde De Patient:</lable>
+    <input type="text" value="' . $ligne->solde . '" readonly="readonly"> Euros</p>
+    
+    ';
+  }
+
+  $affichersynthesepatient .= '</fieldset></form>';
+
+  require_once("vue/gabarit/gabaritAgent.php");
+}
+
+function afficherNSSPatient($NSSPatient)
+{
+
+  $afficherNSSPatient = '<form method="POST" action="site.php">
+  <fieldset>
+  <legend>NSS du Patient</legend>
+  ';
+  foreach ($NSSPatient as $ligne) {
+    $afficherNSSPatient .= '
+    <p>
+    <lable>NSS:</lable>
+    <input type="text" value="' . $ligne->nss . '" readonly="readonly">
+    </p>
+  
+    ';
+  }
+
+  $afficherNSSPatient .= '</fieldset></form>';
+
+  require_once("vue/gabarit/gabaritAgent.php");
+}
+
+function AfficherPrixMotifRDV($prixMotif)
+{
+  $afficherPrixMotifRDV = '<form method="POST" action="site.php">
+  <fieldset>
+  <legend>NSS du Patient</legend>
+  ';
+  foreach ($prixMotif as $ligne) {
+    $afficherPrixMotifRDV .= '
+    <p>
+    <input type="hidden" name="idPatientPayer" value="' . $ligne->id_Patient . '">
+    </p>
+    <p>
+    <lable>Prix Motif RDV:</lable>
+    <input type="text" name="prixMotifPayer" value="' . $ligne->PrixMo . '" readonly="readonly"> Euros
+    </p>
+    <p>
+    <input type="submit" name="effectuerLePayement" value="Effectuer le payement">
+    </p>
+  
+    ';
+  }
+
+  $afficherPrixMotifRDV .= '</fieldset></form>';
+
+  require_once("vue/gabarit/gabaritAgent.php");
+}
+
+
+function afficherPreciserMotif($toutMotif, $nomPatientPrendRDV, $prenomPatientPrendRDV, $nomMedicinPrendRDV, $prenomMedecinPrendRDV, $datePrendRDV)
+{
+  $afficherToutMotif = '<form method="POST" action="site.php">
+  <fieldset>
+  <legend>Tous Les Motif RDV</legend>
+  <p>Vous pouvez prendre ce rendez-vous.</p>
+  <p>
+  <input type="hidden" name="nomPatientEnregistrerRDV" value="' . $nomPatientPrendRDV . '">
+  </p>
+  <p>
+  <input type="hidden" name="prenomPatientEnregistrerRDV" value="' . $prenomPatientPrendRDV . '">
+  </p>
+  <p>
+  <input type="hidden" name="nomMedecinEnregistrerRDV" value="' . $nomMedicinPrendRDV . '">
+  </p>
+  <p>
+  <input type="hidden" name="prenomMedecinEnregistrerRDV" value="' . $prenomMedecinPrendRDV . '">
+  </p>
+  <p>
+  <input type="hidden" name="dateEnregisterRDV" value="' . $datePrendRDV . '">
+
+  </p>
+  <select name="ChoisirMotifRDV">';
+
+  foreach ($toutMotif as $ligne) {
+    $afficherToutMotif .= '
+    <option value="' . $ligne->LibelleMo . '">' . $ligne->LibelleMo . '</option>
+    ';
+  }
+
+
+  $afficherToutMotif .= '
+  <option>...</option>
+  </select> 
+  <p><input type="submit" name="validerRDV" value="Valider"></p>
+  </fieldset></form> ';
+  require_once("vue/gabarit/gabaritAgent.php");
+}
+
+function  afficherPiecesEtConsignes($pieceEtConsigne)
+{
+
+  $Consigne = $pieceEtConsigne[0]->LibelleCo;
+  $LibellePiece = $pieceEtConsigne[0]->LibellePi;
+
+  $afficherPiecesEtConsignes = '<form method="POST" action="site.php">
+  <fieldset>
+  <legend>Tous Les Motif RDV</legend>
+<p>Consignes:<input type="text" value="' . $Consigne . '"readonly="readonly"></p> 
+<p>Pieces:<input type="text" value="' . $LibellePiece . '"readonly="readonly"></p> 
+
+  ';
+
+
+  foreach ($pieceEtConsigne as $ligne) {
+    if ($ligne->LibelleCo != $Consigne) {
+      $afficherPiecesEtConsignes .= '
+  <p>Consignes: <input type="text" value="' . $ligne->LibelleCo . '"readonly="readonly"></>
+    ';
+    } else if ($ligne->LibellePi != $LibellePiece) {
+      $afficherPiecesEtConsignes .= '
+      <p>Pieces: <input type="text" value="' . $ligne->LibellePi . '" readonly="readonly"></p>';
+    }
+  }
+
+
+  $afficherPiecesEtConsignes .= '
+  
+  </fieldset></form> ';
+  require_once("vue/gabarit/gabaritAgent.php");
+}
+
+function afficherLesRDVPasPayer($inforPatientPasPayer)
+{
+  $afficherRDVPasPayer = '<form method="POST" action="site.php">
+  <fieldset>
+  <legend>Les rendez-vous pas encore payer </legend>
+  <table>
+  <tr>
+    <td colspan="2">ID:<input type="text" value="' . $inforPatientPasPayer[0]->idRDV . '"readonly="readonly"></td>
+    </tr>
+  ';
+  foreach ($inforPatientPasPayer as $ligne) {
+    $afficherRDVPasPayer .= '
+    <tr>
+    <td>Jour et heure: <input type="text" value="' . $ligne->dateRDV . '" readonly="readonly"></td>
+    <td>Etat rendez-vous: <input type="text" value="' . $ligne->etatRDV . '"readonly="readonly"></td>
+    </tr>
+    
+   
+    ';
+  }
+  $afficherRDVPasPayer .= '
+  </table></fieldset></form> ';
+  require_once("vue/gabarit/gabaritAgent.php");
+}

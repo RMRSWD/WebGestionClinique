@@ -42,18 +42,68 @@ try {
     $nssPatient = $_POST["nssPatient"];
     $datenaissancePatient = $_POST["datenaissancePatient"];
     $adressePatient = $_POST["adressePatient"];
-    $numtelPatient = $_POST["numtelPatient"];
+    if (is_numeric($_POST["numtelPatient"])) {
+      $numtelPatient = $_POST["numtelPatient"];
+    } else {
+      CtlErreurPasNumber();
+    }
     $departementPatient = $_POST["departementPatient"];
     $soldePatient = $_POST["soldePatient"];
     CtlAfficherFormuleModifierInforPatient($idPatient, $nomPatient, $prenomPatient, $nssPatient, $datenaissancePatient, $adressePatient, $numtelPatient, $departementPatient, $soldePatient);
+  } else if (isset($_POST["affichersynthese"])) {
+    $nss2 = $_POST["nss2"];
+    CtlAfficherLaSynthesePatient($nss2);
+  } else if (isset($_POST["validerChercherNSSPatient"])) {
+    if (!empty($_POST["chercherNomPatient"]) || !empty($_POST["chercherPrenomPatient)"])) {
+      $chercherNomPatient = $_POST["chercherNomPatient"];
+      $chercherPrenomPatient = $_POST["chercherPrenomPatient"];
+      CtlChercherNSSPatientAvecNOmPrenom($chercherNomPatient, $chercherPrenomPatient);
+    } else {
+      $chercherNSSDate = $_POST["chercherDateNaissancePatient"];
+      CtlChercherNSSPatientAvecDate($chercherNSSDate);
+    }
+  } else if (isset($_POST["valideNssDepot"])) {
+    $nssDepot = $_POST["nssDepot"];
+    $montantDepot = $_POST["montantDepot"];
+    CtlAjouterMontantPatient($nssDepot, $montantDepot);
+  } else if (isset($_POST["validePayementMotifRDV"])) {
+    $libelleMotifPayement = $_POST["libelleMotifPayement"];
+    CtlPayerMotifRDVPatient($libelleMotifPayement);
+  } else if (isset($_POST["effectuerLePayement"])) {
+    $idPatientPayer = $_POST["idPatientPayer"];
+    $prixMotifPayer = $_POST["prixMotifPayer"];
+    CtlEffectuerPayementMotifRDV($idPatientPayer, $prixMotifPayer);
+  } else if (isset($_POST["verifierRDV"])) {
+    $nomPatientPrendRDV  = $_POST["nomPatientPrendRDV"];
+    $prenomPatientPrendRDV = $_POST["prenomPatientPrendRDV"];
+    $nomMedicinPrendRDV = $_POST["nomMedicinPrendRDV"];
+    $prenomMedecinPrendRDV = $_POST["prenomMedicinePrendRDV"];
+    $specialiteMedecinPrendRDV = $_POST["specialiteMedecinPrendRDV"];
+    $datePrendRDV = $_POST["datePrendRDV"];
+
+    CtlVerifierRDV($nomPatientPrendRDV, $prenomPatientPrendRDV, $nomMedicinPrendRDV, $prenomMedecinPrendRDV, $specialiteMedecinPrendRDV, $datePrendRDV);
+  } else if (isset($_POST["validerRDV"])) {
+    $nomPatientEnregistrerRDV = $_POST["nomPatientEnregistrerRDV"];
+    $prenomPatientPrendRDV = $_POST["prenomPatientEnregistrerRDV"];
+    $nomMedecinEnregistrerRDV = $_POST["nomMedecinEnregistrerRDV"];
+    $prenomMedecinEnregistrerRDV = $_POST["prenomMedecinEnregistrerRDV"];
+    $dateEnregisterRDV = $_POST["dateEnregisterRDV"];
+    $ChoisirMotifRDV = $_POST["ChoisirMotifRDV"];
+    CtlValiderRDV($nomPatientEnregistrerRDV, $prenomPatientPrendRDV, $nomMedecinEnregistrerRDV, $prenomMedecinEnregistrerRDV, $ChoisirMotifRDV, $dateEnregisterRDV);
+  } else if (isset($_POST["validerNSSRDVEnAttendantPay"])) {
+    $nssRDVEnAttendantPay = $_POST["nssRDVEnAttendantPay"];
+    CtlVoirLesRDVPasPayer($nssRDVEnAttendantPay);
   }
+
 
   //PAGE DE MEDECIN
 
   else if (isset($_POST["reserverLaDate"])) {
+    $NomMedecinReserver = $_POST["nomMedecinReserver"];
+    $PrenomMedecin = $_POST["prenomMedecin"];
     $dateRDVAdmin = $_POST["dateRDVAdmin"];
     $libelleRDVAdmin = $_POST["LibelleRDVAdmin"];
-    CtlCreerRDVAdministratif($dateRDVAdmin, $libelleRDVAdmin);
+    CtlCreerRDVAdministratif($NomMedecinReserver, $PrenomMedecin, $dateRDVAdmin, $libelleRDVAdmin);
   } else if (isset($_POST["validerBloquerCreneau"])) {
     $ChampBloqueCreneau = $_POST["ChampBloqueLesCreneaux"];
     foreach ($ChampBloqueCreneau as $valeur) {
@@ -111,7 +161,7 @@ try {
     $nomMotif = $_POST["nomMotif"];
     $prixMotif = $_POST["prixMotif"];
     $nomPieceFournit = "";
-    //$nomPieceFournit = $_POST["nomPieceFournit"];
+    $nomConsigneFournit = "";
     CtlCreerNouveauMotif($nomMotif, $prixMotif);
     foreach ($_POST["nomPieceFournit"] as $element) {
       if (empty($element)) {
@@ -119,6 +169,14 @@ try {
       } else {
         $nomPieceFournit = $element;
         CtlCreerMotifD($nomMotif, $nomPieceFournit);
+      }
+    }
+    foreach ($_POST["nomConsigneFournit"] as $element1) {
+      if (empty($element1)) {
+        echo "erreur pas d'élément dans consigne";
+      } else {
+        $nomConsigneFournit = $element1;
+        CtlCreerConsigneD($nomMotif, $nomConsigneFournit);
       }
     }
   } else if (isset($_POST["validerIDMotif"])) {
@@ -129,37 +187,19 @@ try {
     $libelleMotif = $_POST["libelleMotif"];
     $prixMotif = $_POST["prixMotif"];
     $nomPieceModifD = "";
-    //CtlUpdateMotif($idMotif, $libelleMotif, $prixMotif);
 
 
-    // $arrlength = count($_POST["idPieceModifD"]);
-    // echo $arrlength;
+
+
     $ids = $_POST["idPieceModifD"];
     $noms = $_POST["nomPieceModifD"];
 
-    // for ($x = 0; $x < $arrlength; $x++) {
-    //   $idPieceModifD = $ids[$x];
-    //   $nomPieceModifD = $noms[$x];
-    //   echo $idPieceModifD;
-    //   CtlUpdatePiece($idPieceModifD, $nomPieceModifD);
-    // }
 
 
     foreach ($ids as $key => $value) {
-      // echo "The index is = " . $key . ", and value is = " . $value . "and nom =" . $noms[$key];
-      // echo "\n";
+
       CtlUpdatePiece($value, $noms[$key]);
     }
-
-    // foreach ($_POST["idPieceModifD"] as $idPiece) {
-    // echo $idPiece;
-    //$nomPieceModifD = $nomPiece;
-    // $idPieceModifD = $idPiece;
-    // $nomPieceModifD = $_POST["nomPieceModifD"];
-    // CtlUpdatePiece($idPieceModifD, $nomPieceModifD);
-    // }
-
-    // CtlUpdateMotif($idMotif, $libelleMotif, $prixMotif);
   } else if (isset($_POST["supprimerMotif"])) {
     $libelleMotifSD = $_POST["libelleMotifSD"];
     CtlSupprimerMotif($libelleMotifSD);

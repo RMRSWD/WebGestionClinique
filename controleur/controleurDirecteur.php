@@ -86,10 +86,7 @@ function CtlModifierInforDirecteur($idDirecteur, $loginDirecteur, $mdpDirecteur,
     throw new Exception("Login est invalide");
   }
 }
-// function CtlAfficherTousPieces()
-// {
-//   afficherTousLesPieces(RecupererTousLesPieces());
-// }
+
 
 function CtlCreerNouveauMotif($nomMotif, $prixMotif)
 {
@@ -110,59 +107,33 @@ function CtlCreerMotifD($nomMotif, $choisirLesPieces)
 
     CreerNouveauIdMotifEtIdPieceInTablePM($numMo, $numPi);
 
-    afficherCreerMotifSucess();
+    // afficherCreerMotifSucess();
   } else {
     throw new Exception("Syntex invalide");
   }
-
-
-
-  // if (!empty($nomMotif) && !empty($prixMotif) && !empty($choisirLesPieces)) {
-  //   $numID = RecupererIdPiece($choisirLesPieces);
-  //   $num = $numID->Id_Piece;
-  //   CreerNouveauMotif($nomMotif, $prixMotif, $num);
-  //   afficherCreerMotifSucess();
-  // } else {
-  //   throw new Exception("Syntex invalide");
-  // }
 }
 
-
-
-
-
-
-
+function CtlCreerConsigneD($nomMotif, $nomConsigneFournit)
+{
+  if (!empty($nomConsigneFournit)) {
+    CreerNouveauConsigne($nomConsigneFournit);
+    $numIDMotif = RecupererIdMotif($nomMotif);
+    $numMo = $numIDMotif->Id_Motif;
+    $numIDConsigne = RecupererIdConsigne($nomConsigneFournit);
+    $numConsigne = $numIDConsigne->Id_Consigne;
+    CreerNouveauIdMotifEtIdConsigneInTableCM($numMo, $numConsigne);
+    afficherCreerMotifSucess();
+  }
+}
 
 function CtlAfficherModifierIdMotif($idMotif)
 {
   if (!empty($idMotif))
     afficherModifierMotif(RecupererInforInTablePMETMotifEtPiece($idMotif));
-  // if (!empty(RecupererIdPieceInTablePM($idMotif))) {
-  //   foreach (RecupererIdPieceInTablePM($idMotif) as $ligneIdP) {
-  //     RecupererNomPieceInTablePiece($ligneIdP->Id_Piece);
-  // afficherModifierPieceInFormMotif(RecupererNomPieceInTablePiece(RecupererIdPieceInTablePM($idMotif)));
-  // } else {
-  //   echo "erreur";
-  // }
   else {
     throw new Exception("Id invalide");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function CtlUpdateMotif($idMotif, $libelleMotif, $prixMotif)
