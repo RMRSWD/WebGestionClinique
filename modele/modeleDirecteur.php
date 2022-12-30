@@ -307,10 +307,25 @@ function SupprimerIdInTableSpecialite($idSpecialite)
   $resultat->closeCursor();
 }
 
+function SupprimerIdMedecinInTableRDV($id_MedecinSupprimer)
+{
+  $connexion = getConnect();
+  $requete = "DELETE FROM rdv WHERE id='$id_MedecinSupprimer'";
+  $resultat = $connexion->query($requete);
+  $resultat->closeCursor();
+}
+
 function SupprimerIdInTableMedecin($id_MedecinSupprimer)
 {
   $connexion = getConnect();
-  $requete = "DELETE  FROM medecin WHERE id='$id_MedecinSupprimer'";
+  $requete = "DELETE FROM medecin WHERE id='$id_MedecinSupprimer'";
+  $resultat = $connexion->query($requete);
+  $resultat->closeCursor();
+}
+function SupprimerIdMedecinInTableTravailAdmin($id_MedecinSupprimer)
+{
+  $connexion = getConnect();
+  $requete = "DELETE FROM travailadmin WHERE id='$id_MedecinSupprimer'";
   $resultat = $connexion->query($requete);
   $resultat->closeCursor();
 }

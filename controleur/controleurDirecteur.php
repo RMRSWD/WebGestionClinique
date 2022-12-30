@@ -186,11 +186,17 @@ function CtlCreerNomPrenomSpecialiteMedecin($numMedecin, $nomMedecin, $prenomMed
 
 function CtlSupprimerMedecin($id_MedecinSupprimer)
 {
-  $inforSpecialise = RecupererInforInTableSpecialise($id_MedecinSupprimer);
-  $idSpecialite = $inforSpecialise->idSP;
-  SupprimerIdMedecinInTabnleSpecialise($id_MedecinSupprimer);
-  SupprimerIdInTableSpecialite($idSpecialite);
-  SupprimerIdInTableMedecin($id_MedecinSupprimer);
-  SupprimerIdMedecinInTableGestionConnect($id_MedecinSupprimer);
-  afficherSupprimerMedecinSucces();
+  if (is_numeric($id_MedecinSupprimer)) {
+    $inforSpecialise = RecupererInforInTableSpecialise($id_MedecinSupprimer);
+    $idSpecialite = $inforSpecialise->idSP;
+    SupprimerIdMedecinInTabnleSpecialise($id_MedecinSupprimer);
+    SupprimerIdInTableSpecialite($idSpecialite);
+    SupprimerIdMedecinInTableRDV($id_MedecinSupprimer);
+    SupprimerIdMedecinInTableTravailAdmin($id_MedecinSupprimer);
+    SupprimerIdInTableMedecin($id_MedecinSupprimer);
+    SupprimerIdMedecinInTableGestionConnect($id_MedecinSupprimer);
+    afficherSupprimerMedecinSucces();
+  } else {
+    throw new Exception("Erreur ID Medecin.");
+  }
 }
