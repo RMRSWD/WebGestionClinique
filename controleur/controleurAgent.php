@@ -5,9 +5,7 @@ require_once('modele/modeleAgent.php');
 
 function CtlAccueilAgent()
 {
-  $nom = $_SESSION['agentAcceuil']->nomP;
-  $prenom = $_SESSION['agentAcceuil']->prenomP;
-  afficherAcceuilleAgent($nom, $prenom);
+  afficherAcceuilleAgent();
 }
 
 
@@ -16,7 +14,6 @@ function CtlCreerUnPatient($nom, $prenom, $nss, $datedenaissance, $adresse, $num
   if (!empty($nom) && !empty($prenom) && !empty($nss) && !empty($datedenaissance) && !empty($adresse) && !empty($numtel) && !empty($departementdenaissance) && !empty($solde)) {
     ajouterUnPatient($nom, $prenom, $nss, $datedenaissance, $adresse, $numtel, $departementdenaissance, $solde);
     afficherAjouterAvecSuccess();
-    CtlAccueilAgent();
   } else {
     throw new Exception("un champ est invalide");
   }
@@ -92,9 +89,11 @@ function CtlAjouterMontantPatient($nssDepot, $montantDepot)
   afficherAjouterSoldeAvecSuccess();
 }
 
-function CtlPayerMotifRDVPatient($libelleMotifPayement)
+function CtlPayerMotifRDVPatient($IDPatientPayement)
 {
-  AfficherPrixMotifRDV(RecupererPrixMotifRDV($libelleMotifPayement));
+  $a = RecupererIDMotifRDVInTableRDV($IDPatientPayement);
+  $IDMotif = $a->Id_Motif;
+  AfficherPrixMotifRDV(RecupererPrixMotifRDV($IDMotif), $IDPatientPayement);
 }
 
 function CtlEffectuerPayementMotifRDV($idPatientPayer, $prixMotifPayer)
@@ -117,15 +116,16 @@ function CtlVerifierRDV($nomPatientPrendRDV, $prenomPatientPrendRDV, $nomMedicin
   $idMedecin = $a->id;
   $b = RecupererInforRDV($idMedecin);
   $specialiteMedecin = $b->libelleSP;
-  $dateRDV = $b->DateTa;
+  $dateP = date('Y-m-d H:i:s', strtotime($datePrendRDV));
+  $verifierDate = VerifierDateInTableTacheAdmin($dateP);
   if ($specialiteMedecin == $specialiteMedecinPrendRDV) {
-    if ($dateRDV != $datePrendRDV) {
+    if (empty($verifierDate)) {
       afficherPreciserMotif(RecupeterMotifInTableMotif(), $nomPatientPrendRDV, $prenomPatientPrendRDV, $nomMedicinPrendRDV, $prenomMedecinPrendRDV, $datePrendRDV);
     } else {
-      throw new Exception("Date est indisponnible. Donnez une autre date.");
+      $causeRefuserRDV = $verifierDate->LibelleTa;
+      afficherErreurDateIndisponible($causeRefuserRDV);
     }
   } else {
-    // throw new Exception("le spécialité du médecin est pas correspondant.");
     afficherErreurSPPasCoresspondre();
   }
 }

@@ -15,21 +15,12 @@ function chercherUnPatient($nom, $prenom)
 {
   $connexion = getConnect();
   $requete = "SELECT * FROM informationpatient WHERE nom='$nom' and prenom ='$prenom'";
-  $resultat = $connexion->query($requete); //thuc hien cau lenh
-  $resultat->setFetchMode(PDO::FETCH_OBJ); // tra ve ket qua duoi dang bang
-  $chercher = $resultat->fetchall(); //lay qua trong bang tra ve duoi dang doi tuong
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $chercher = $resultat->fetchall();
   $resultat->closeCursor();
   return $chercher;
 }
-
-// function UpdateInformationClient($nom, $prenom, $nss, $datedenaissance, $adresse, $numtel, $departementdenaissance)
-// {
-//   $connexion = getConnect();
-//   $requete = "UPDATE informationpatient SET nom='$nom',prenom='$prenom',nss='$nss',datenaissance='$datedenaissance',adresse='$adresse',numtel='$numtel',departementnaissance='$departementdenaissance'";
-//   $resultat = $connexion->query($requete);
-//   $resultat->closeCursor();
-// }
-
 
 
 function recupererNomPrenomAgent($login, $mdp)
@@ -74,9 +65,9 @@ function ChercherNSSAvecDate($chercherNSSDate)
 {
   $connexion = getConnect();
   $requete = "SELECT * FROM informationpatient WHERE datenaissance='$chercherNSSDate'";
-  $resultat = $connexion->query($requete); //thuc hien cau lenh
-  $resultat->setFetchMode(PDO::FETCH_OBJ); // tra ve ket qua duoi dang bang
-  $chercherNSSDate = $resultat->fetchAll(); //lay qua trong bang tra ve duoi dang doi tuong
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $chercherNSSDate = $resultat->fetchAll();
   $resultat->closeCursor();
   return $chercherNSSDate;
 }
@@ -99,10 +90,20 @@ function UpdateSoldePatient($nssDepot, $nouveauSolde)
   $resultat->closeCursor();
 }
 
-function RecupererPrixMotifRDV($libelleMotifPayement)
+function  RecupererIDMotifRDVInTableRDV($IDPatientPayement)
 {
   $connexion = getConnect();
-  $requete = "SELECT * FROM rdv r1 INNER JOIN motif m1 on r1.Id_Motif=m1.Id_Motif WHERE m1.LibelleMo='$libelleMotifPayement'";
+  $requete = "SELECT * FROM rdv WHERE id_Patient='$IDPatientPayement'";
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $recupererIDMotif = $resultat->fetch();
+  return $recupererIDMotif;
+}
+
+function RecupererPrixMotifRDV($IDMotif)
+{
+  $connexion = getConnect();
+  $requete = "SELECT * FROM motif WHERE Id_Motif='$IDMotif'";
   $resultat = $connexion->query($requete);
   $resultat->setFetchMode(PDO::FETCH_OBJ);
   $recupererPrixMotif = $resultat->fetchall();
@@ -142,6 +143,19 @@ function RecupererIdMedecinRDV($nomMedecin, $prenomMedecin)
   $resultat->closeCursor();
   return $idMedecin;
 }
+
+function VerifierDateInTableTacheAdmin($dateP)
+{
+  $connexion = getConnect();
+  $requete = "SELECT * FROM tacheadmin WHERE DateTa ='$dateP'";
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $dateCorres = $resultat->fetch();
+  $resultat->closeCursor();
+  return $dateCorres;
+}
+
+
 
 function RecupererInforRDV($idMedecin)
 {

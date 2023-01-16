@@ -10,13 +10,54 @@ function CreerUnRDVAdmin($dateRDVAdmin, $motifRDVAdmin)
   $resultat = $connexion->query($requete);
   $resultat->closeCursor();
 }
+
+
+function  CreerUnRDVAdminPlus($valeur)
+{
+  $connexion = getConnect();
+  $requete = "INSERT INTO tacheadmin VALUES(0,'$valeur','formation')";
+  $resultat = $connexion->query($requete);
+  $resultat->closeCursor();
+}
+
+function RecupererIdRDVAdministratifPlus($valeur)
+{
+  $connexion = getConnect();
+  $requete = "SELECT * FROM tacheadmin WHERE DateTa='$valeur'";
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $idTaAdmin = $resultat->fetch();
+  $resultat->closeCursor();
+  return $idTaAdmin;
+}
+
+function  CreerUnRDVAdminPlusInTableTravailAdmin($IDMedecinPlus, $IDTravailAdminPlus)
+{
+  $connexion = getConnect();
+  $requete = "INSERT INTO travailadmin VALUES('$IDMedecinPlus','$IDTravailAdminPlus')";
+  $resultat = $connexion->query($requete);
+  $resultat->closeCursor();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function RecupererIdTaAdmin($valeur)
 {
   $connexion = getConnect();
   $requete = "SELECT * FROM tacheadmin WHERE DateTa='$valeur'";
-  $resultat = $connexion->query($requete); //thuc hien cau lenh
-  $resultat->setFetchMode(PDO::FETCH_OBJ); // tra ve ket qua duoi dang bang
-  $idTaAdmin = $resultat->fetch(); //lay qua trong bang tra ve duoi dang doi tuong
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $idTaAdmin = $resultat->fetch();
   $resultat->closeCursor();
   return $idTaAdmin;
 }
@@ -40,9 +81,9 @@ function RecupererIdMedecin($nomMedecin, $prenomMedecin)
 {
   $connexion = getConnect();
   $requete = "SELECT * FROM gestionconnect WHERE nomP='$nomMedecin'and prenomP='$prenomMedecin'";
-  $resultat = $connexion->query($requete); //thuc hien cau lenh
-  $resultat->setFetchMode(PDO::FETCH_OBJ); // tra ve ket qua duoi dang bang
-  $idMedecin = $resultat->fetch(); //lay qua trong bang tra ve duoi dang doi tuong
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $idMedecin = $resultat->fetch();
   $resultat->closeCursor();
   return $idMedecin;
 }
@@ -51,9 +92,9 @@ function RecupererIdRDVAdministratif($motifRDVAdmin)
 {
   $connexion = getConnect();
   $requete = "SELECT * FROM tacheadmin WHERE LibelleTa='$motifRDVAdmin'";
-  $resultat = $connexion->query($requete); //thuc hien cau lenh
-  $resultat->setFetchMode(PDO::FETCH_OBJ); // tra ve ket qua duoi dang bang
-  $idTaAdmin = $resultat->fetch(); //lay qua trong bang tra ve duoi dang doi tuong
+  $resultat = $connexion->query($requete);
+  $resultat->setFetchMode(PDO::FETCH_OBJ);
+  $idTaAdmin = $resultat->fetch();
   $resultat->closeCursor();
   return $idTaAdmin;
 }

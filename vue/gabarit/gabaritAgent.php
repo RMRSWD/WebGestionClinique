@@ -7,17 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestion Page Agent</title>
   <script src="vue/fichier.js" text="text/javascript">
-
   </script>
+  <link rel="stylesheet" href="vue/gabarit/style.css">
+
 
 </head>
 
 <body>
   <h1>
-    <?php
-    echo "Bienvenue sur la page d'agent " . $nom . " " . $prenom;
-
-    ?>
+    Bienvenue sur la page d'agent
   </h1>
   <form action="site.php" method="POST">
     <p><input type="submit" name="deconecte" value="Déconnexion"></p>
@@ -156,7 +154,7 @@
         <input type="text" name="nss2">
       </p>
       <p>
-        <input type="submit" name="affichersynthese" value="synthèse patient">
+        <input type="submit" name="affichersynthese" value="Valider">
       </p>
     </fieldset>
   </form>
@@ -201,11 +199,11 @@
         Effectuer le payement
       </legend>
       <p>
-        Saisissez ici la libellé du motif RDV pour voir le prix
+        Saisissez ici ID du patient pour voir le prix
       </p>
       <p>
-        <label for="">Nom Du Motif:</label>
-        <input type="text" name="libelleMotifPayement">
+        <label for="">ID du patient:</label>
+        <input type="text" name="IDPatientPayement">
       </p>
       <p>
         <input type="submit" name="validePayementMotifRDV" value="Valider">
@@ -286,6 +284,12 @@
     echo $afficherErreurSPPasCorrespondre;
   }
   ?>
+  <?php
+  if (!empty($afficherErreurDateIndispo)) {
+    echo $afficherErreurDateIndispo;
+  }
+  ?>
+
 
 
   <form action="site.php" method="POST">
@@ -307,13 +311,6 @@
     echo $afficherRDVPasPayer;
   }
   ?>
-
-
-
-
-
-
-
 
 
 </body>

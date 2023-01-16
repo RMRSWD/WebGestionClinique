@@ -1,13 +1,12 @@
 <?php
+
 require_once('vue/vue_/vueDirecteur.php');
 require_once('modele/modeleDirecteur.php');
 
 
 function CtlAccueilDirect()
 {
-  $nom = $_SESSION['Directeur']->nomP;
-  $prenom = $_SESSION['Directeur']->prenomP;
-  afficherAcceuilleDirecteur($nom, $prenom);
+  afficherAcceuilleDirecteur();
 }
 function CtlDeconnexionDirecteur()
 {
@@ -34,7 +33,10 @@ function CtrCreerNewLogin($genre, $login, $mdp)
 
 function CtlAfficherInformationAgent()
 {
+
+
   afficherInforAgent(recupererInfoAgent());
+  CtlAccueilDirect();
 }
 function CtlAfficherInformationMedecin()
 {
@@ -106,8 +108,6 @@ function CtlCreerMotifD($nomMotif, $choisirLesPieces)
     $numPi = $numIDPiece->Id_Piece;
 
     CreerNouveauIdMotifEtIdPieceInTablePM($numMo, $numPi);
-
-    // afficherCreerMotifSucess();
   } else {
     throw new Exception("Syntex invalide");
   }

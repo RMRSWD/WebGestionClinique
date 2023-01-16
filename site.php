@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once('controleur/controleurlogin.php');
 require_once('controleur/controleurMedecin.php');
 require_once('controleur/controleurAgent.php');
@@ -10,7 +12,6 @@ try {
     $login = $_POST["login"];
     $mdp = $_POST["mdp"];
     CtrVerifierLogin($login, $mdp);
-    // CtlNomPrenom($login, $mdp);
   } elseif (isset($_POST["deconecte"])) {
     CtlDeconnexionAgent();
   } elseif (isset($_POST["deconecteDirecteur"])) {
@@ -67,8 +68,8 @@ try {
     $montantDepot = $_POST["montantDepot"];
     CtlAjouterMontantPatient($nssDepot, $montantDepot);
   } else if (isset($_POST["validePayementMotifRDV"])) {
-    $libelleMotifPayement = $_POST["libelleMotifPayement"];
-    CtlPayerMotifRDVPatient($libelleMotifPayement);
+    $IDPatientPayement = $_POST["IDPatientPayement"];
+    CtlPayerMotifRDVPatient($IDPatientPayement);
   } else if (isset($_POST["effectuerLePayement"])) {
     $idPatientPayer = $_POST["idPatientPayer"];
     $prixMotifPayer = $_POST["prixMotifPayer"];
@@ -105,9 +106,11 @@ try {
     $libelleRDVAdmin = $_POST["LibelleRDVAdmin"];
     CtlCreerRDVAdministratif($NomMedecinReserver, $PrenomMedecin, $dateRDVAdmin, $libelleRDVAdmin);
   } else if (isset($_POST["validerBloquerCreneau"])) {
+    $NomMedecinBloquerPlus = $_POST["nomMedecinBloquerPlus"];
+    $PrenomMedecinBloquerPlus = $_POST["prenomMedecinBloquerPlus"];
     $ChampBloqueCreneau = $_POST["ChampBloqueLesCreneaux"];
     foreach ($ChampBloqueCreneau as $valeur) {
-      CtlBloquerCreneauMedecin($valeur);
+      CtlBloquerCreneauMedecin($valeur, $NomMedecinBloquerPlus, $PrenomMedecinBloquerPlus);
     }
   }
 
@@ -153,8 +156,6 @@ try {
     CtlModifierInforDirecteur($idDirecteur, $loginDirecteur, $mdpDirecteur, $nomDirecteur, $prenomDirecteur);
   }
 
-
-
   // Créer un motif 
 
   else if (isset($_POST["validerMotif"])) {
@@ -188,14 +189,8 @@ try {
     $prixMotif = $_POST["prixMotif"];
     $nomPieceModifD = "";
 
-
-
-
     $ids = $_POST["idPieceModifD"];
     $noms = $_POST["nomPieceModifD"];
-
-
-
     foreach ($ids as $key => $value) {
 
       CtlUpdatePiece($value, $noms[$key]);

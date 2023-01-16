@@ -41,7 +41,7 @@ function recupererInfoMedecin()
   $resultat = "SELECT  * FROM  gestionconnect WHERE genre='M'";
   $resultat = $connexion->query($resultat);
   $resultat->setFetchMode(PDO::FETCH_OBJ);
-  $recupererinforM = $resultat->fetchall(); //tra lai toan thong tin theo dong
+  $recupererinforM = $resultat->fetchall();
   return $recupererinforM;
 }
 function recupererInfoModif($idPersonnelD)

@@ -1,9 +1,5 @@
 <?php
-
-$nom = 'test';
-$prenom = 'test';
-//if (strlen(session_id()) < 1) session_start();
-function afficherAcceuilleDirecteur($nom, $prenom)
+function afficherAcceuilleDirecteur()
 
 {
   require_once('vue/gabarit/gabaritDirecteur.php');
@@ -11,12 +7,6 @@ function afficherAcceuilleDirecteur($nom, $prenom)
 function deconnexion()
 
 {
-  // $deconnexion = '';
-  // $deconnexion .= '
-  // <script> 
-  // alert("Vous avez déconnecté")
-  // </script>';
-  //require_once('vue/gabarit/gabaritDirecteur.php');
   require_once('vue/gabarit/gabarit.php');
 }
 
@@ -70,7 +60,7 @@ function afficherCreerNomPrenomSpecialiteMedecinSucces()
 }
 function afficherSupprimerMedecinSucces()
 {
-  $afficherCreerNomPrenomSpecialiteSucess = '<script>
+  $afficherSupprimerNomPrenomSpecialiteSucess = '<script>
   alert("Votre demande de supprimer un médecin est bien effectué ");
   </script>';
   require_once('vue/gabarit/gabaritDirecteur.php');
@@ -84,18 +74,30 @@ function afficherInforAgent($inforAgent)
 
 
     foreach ($inforAgent as $ligne) {
-      $contenuPersonnelAD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
+      $contenuPersonnelAD .= '
 
-    <p><label>Login: ' . $ligne->login . '</label> </p> 
+      <p>
+      <label>ID:</label>
+      <input type="text" value="' . $ligne->id . '" readonly="readonly">
+      </p>
+
+    <p><label>Login:</label>
+    <input type="text" value="' . $ligne->login . '" readonly="readonly">
+    </p> 
 
 
-    <p><label> Mot  de passe: ' . $ligne->mdp . '</label></p>
+    <p><label> Mot  de passe:</label>
+    <input type="text" value="' . $ligne->mdp . '" readonly="readonly">
+    </p>
 
 
-    <p<label> Nom: ' . $ligne->nomP . '</label></p>
+    <p<label> Nom: </label>
+    <input type="text" value="' . $ligne->nomP . '" readonly="readonly">
+    </p>
 
 
-    <p><label>Prenom: ' . $ligne->prenomP . '</label>
+    <p><label>Prenom: </label>
+    <input type="text" value="' . $ligne->prenomP . '" readonly="readonly">
     </p><hr>
     ';
     }
@@ -156,17 +158,27 @@ function afficherInforMedecin($inforMedecin)
   <fieldset> <legend>Afficher les bases de medecin</legend>';
   if (!empty($inforMedecin)) {
     foreach ($inforMedecin as $ligne) {
-      $contenuPersonnelMD .= '<p><label for="">ID: </label>' . $ligne->id . '</p>
-    <p><label>Login: ' . $ligne->login . '</label></p> 
+      $contenuPersonnelMD .= '<p><label for="">ID: </label>
+      <input type="text" value="' . $ligne->id . '" readonly="readonly">
+      </p>
+    <p><label>Login:</label>
+    <input type="text" value="' . $ligne->login . '"readonly="readonly">
+    </p> 
 
 
-    <p><label> Mot  de passe: ' . $ligne->mdp . '</label></p>
+    <p><label> Mot  de passe:</label>
+    <input type="text" value="' . $ligne->mdp . '"readonly="readonly">
+    </p>
 
 
-    <p><label> Nom: ' . $ligne->nomP . '</label></p>
+    <p><label> Nom:</label>
+    <input type="text" value="' . $ligne->nomP . '"readonly="readonly">
+    </p>
 
 
-    <p><label>Prenom: ' . $ligne->prenomP . '</label></p><hr>
+    <p><label>Prenom:</label>
+    <input type="text" value="' . $ligne->prenomP . '"readonly="readonly">
+    </p><hr>
     ';
     }
   } else {
@@ -256,40 +268,6 @@ function afficherPourModifierInforDirecteur($inforDirecteur)
   $contenuModifLogMotD .= '</fieldset></form>';
   require_once('vue/gabarit/gabaritDirecteur.php');
 }
-
-// function afficherTousLesPieces($piece)
-// {
-//   $afficherTousLesPieces = '<form method="POST" action="site.php"> 
-//   <fieldset> <legend> Tous les pièces</legend>
-//   ';
-//   // foreach ($piece as $ligne) {
-//   //   $afficherTousLesPieces .= '<p>
-//   //   <input type="checkbox" name="checkbox_piece" value="' . $ligne->LibellePi . '"><label>' . $ligne->LibellePi . '</label>
-
-//   // </p>';
-//   // }
-//   $afficherTousLesPieces .= '<p>
-//   <select name="choisirLesPieces[]" multiple onchange="ValideSelectBox(this)">
-//   ';
-//   foreach ($piece as $ligne) {
-//     $afficherTousLesPieces .= '
-//   <option value="' . $ligne->LibellePi . '">' . $ligne->LibellePi . '</option>
-//   ';
-//   }
-
-//   $afficherTousLesPieces .= '</select></p>
-
-//   <p>Vous avez selectioné:</p>
-
-//   <div id="resultPiece"></div>
-
-//   ';
-
-//   $afficherTousLesPieces .= '</fieldset></form>
-//   ';
-//   require_once('vue/gabarit/gabaritDirecteur.php');
-// }
-
 function afficherModifierMotif($idMotif)
 {
   if (empty($idMotif)) {
@@ -318,10 +296,8 @@ function afficherModifierMotif($idMotif)
    <input type="text" name="prixMotif"  value="' . $idMotif[0]->PrixMo . '"> 
   </p>
   ';
-
     foreach ($idMotif as $ligne) {
       $afficherModifierMotif .= ' 
-
     <p>
       <label>Nom Piece</label>
       <input type="hidden" name="idPieceModifD[]" value="' . $ligne->Id_Piece . '">
@@ -332,34 +308,6 @@ function afficherModifierMotif($idMotif)
     
     
   ';
-      // }
-      // foreach ($nomPiece as $ligne1) {
-      //   $afficherModifierMotif .= '
-      //   <p>
-      //   <label>Nom Piece</label>
-      //   <input type="text" name="nomPieceModifD" value="' . $ligne1->LibellePi . '">
-      //   </p>
-      //   <p>
-
-      // <input type="submit" name="modifierMotifD" value="Enregistrer">
-
-      // </p>
-      //   ';
-      // }
-      // foreach ($nomPiece as $ligne1) {
-      //   $afficherModifierMotif .= '
-      // <tr>
-      // <td>Nom Piece </td>
-      // <td> <input type="text" name="nomPiece"  value="' . $ligne1->LibellePi . '"> </td>
-      // </tr>
-      // <tr>
-      // <td colspan="2" align="center">
-      // <input type="submit" name="modifierMotifD" value="Enregistrer">
-      // </td>
-      // </tr>
-      // </table>
-      //   ';
-      // }
     }
 
     $afficherModifierMotif .= '
@@ -373,39 +321,3 @@ function afficherModifierMotif($idMotif)
     require_once('vue/gabarit/gabaritDirecteur.php');
   }
 }
-
-
-// function afficherModifierPieceInFormMotif($nomPiece)
-// {
-//   $afficherModifierPieceMotif = '<form action="site.php" method="POST"> 
-//   <fieldset>
-//   <legend>Afficher les Piece d\'un motif de rendez-vous</legend>';
-
-//   foreach ($nomPiece as $ligne) {
-//     $afficherModifierPieceMotif .= '<table border="1" align="center" cellspacing="0"cellpadding="0" with="850px">
-//     <tr>
-//     <td colspan="2"><h2>Modifier Information Piece</h2></td>
-//     </tr>
-//     <tr>
-//     <td>ID </td>
-//     <td> <input type="text" name="idPiece" readonly="readonly" value="' . $ligne->Id_Piece . '"> </td>
-//     </tr>
-//     <tr>
-//     <td>Libelle Motif </td>
-//     <td> <input type="text" name="libellePiece" value="' . $ligne->LibellePi . '"> </td>
-//     </tr>
-//     <tr>
-//     <td colspan="2" align="center">
-//     <input type="submit" name="modifierPiece" value="Enregistrer">
-//     </td>
-//     </tr>
-//     </table>
-    
-//   ';
-//   }
-
-
-//   $afficherModifierPieceMotif .= '</fieldset></form>';
-
-//   require_once('vue/gabarit/gabaritDirecteur.php');
-// }

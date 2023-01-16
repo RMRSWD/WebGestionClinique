@@ -8,16 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestion Page Directeur</title>
   <script src="vue/fichier.js" text="text/javascript"></script>
+  <link rel="stylesheet" href="vue/gabarit/style.css">
+
 </head>
 
 
 
 <body>
   <h1>
-    <?php
-    session_start();
-    echo "Bienvenue sur la page directeur " . $nom . " " . $prenom;
-    ?>
+    Bienvenue sur la page directeur
   </h1>
   <form action="site.php" method="POST">
     <p><input type="submit" name="deconecteDirecteur" value="Déconnexion"></p>
@@ -56,6 +55,41 @@
     echo $afficherCreerSucess;
   }
   ?>
+
+  <form action="site.php" method="POST">
+    <fieldset>
+      <legend>Créer nom , prénom et sprécialité d'un médecin</legend>
+      <p>
+        <i>Veuillez fournir un ID de médecin. Cette partie associent aux login et mot de passe que vous avez créés précédemment.</i></br>
+        <label for="">Id Médecin: </label>
+        <input type="text" name="numMedecin">
+      </p>
+      </p>
+      <p>
+        <label for="">Nom Médecin: </label>
+        <input type="text" name="nomMedecin">
+      </p>
+      <p>
+        <label for="">Prénom Médecin: </label>
+        <input type="text" name="prenomMedecin">
+      </p>
+      <p>
+        <label for="">Spécialité Médecin: </label>
+        <input type="text" name="specialiteMedecin">
+      </p>
+      <p>
+        <input type="submit" name="ValiderCreerUnMedecin" value="Valider">
+      </p>
+    </fieldset>
+  </form>
+
+  <?php
+  if (!empty($afficherCreerNomPrenomSpecialiteSucess)) {
+    echo $afficherCreerNomPrenomSpecialiteSucess;
+  }
+  ?>
+
+
   <form action="site.php" method="POST">
     <fieldset>
       <legend>Afficher Information d'Agent</legend>
@@ -140,10 +174,7 @@
         </label>
         <input type="text" name="prixMotif">
       </p>
-      <!-- <p>
-        <label for="">Piece fournit: </label>
-      <p>Indiquez le nombre piece fournit pour ce motif</p>
-      <input type="text" name="nombrePiece"> -->
+
       <p><label for="">Donnez nombre pièce fournit:</label> <input type="text" name="z1" />
         <input type="button" value="Executer" onclick="nbPiece()" />
       </p>
@@ -186,14 +217,6 @@
     echo $afficherModifierMotif;
   }
   ?>
-  <!-- <?php
-        // if (!empty($afficherModifierPieceMotif)) {
-        //   echo $afficherModifierPieceMotif;
-        // }
-        ?> -->
-
-
-
   <?php
   if (!empty($afficherModifierMotifSucess)) {
     echo $afficherModifierMotifSucess;
@@ -220,38 +243,7 @@
   }
   ?>
 
-  <form action="site.php" method="POST">
-    <fieldset>
-      <legend>Créer nom , prénom et sprécialité d'un médecin</legend>
-      <p>
-        <i>Veuillez fournir un ID de médecin. Cette partie associent aux login et mot de passe que vous avez créés précédemment.</i></br>
-        <label for="">Id Médecin: </label>
-        <input type="text" name="numMedecin">
-      </p>
-      </p>
-      <p>
-        <label for="">Nom Médecin: </label>
-        <input type="text" name="nomMedecin">
-      </p>
-      <p>
-        <label for="">Prénom Médecin: </label>
-        <input type="text" name="prenomMedecin">
-      </p>
-      <p>
-        <label for="">Spécialité Médecin: </label>
-        <input type="text" name="specialiteMedecin">
-      </p>
-      <p>
-        <input type="submit" name="ValiderCreerUnMedecin" value="Valider">
-      </p>
-    </fieldset>
-  </form>
 
-  <?php
-  if (!empty($afficherCreerNomPrenomSpecialiteSucess)) {
-    echo $afficherCreerNomPrenomSpecialiteSucess;
-  }
-  ?>
 
   <form action="site.php" method="POST">
     <fieldset>
@@ -272,8 +264,8 @@
   </form>
 
   <?php
-  if (!empty($afficherCreerNomPrenomSpecialiteSucess)) {
-    echo $afficherCreerNomPrenomSpecialiteSucess;
+  if (!empty($afficherSupprimerNomPrenomSpecialiteSucess)) {
+    echo $afficherSupprimerNomPrenomSpecialiteSucess;
   }
   ?>
 

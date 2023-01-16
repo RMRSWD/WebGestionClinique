@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=h, initial-scale=1.0">
   <title>Gestion De Connection</title>
+  <link rel="stylesheet" href="vue/gabarit/style.css">
 </head>
 
 
@@ -30,10 +31,17 @@
     </form>
   </div>
   <?php
+  if (!empty($erreurLogin)) {
+    echo $erreurLogin;
+  }
+  ?>
+
+  <?php
   if (!empty($contenue)) {
     echo $contenue;
   }
   ?>
+
 </body>
 
 </html>

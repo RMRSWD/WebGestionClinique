@@ -4,9 +4,7 @@ require_once('vue/vue_/vueMedecin.php');
 
 function CtlAcceuilMedecin()
 {
-  $nom = $_SESSION['Medecin']->nomP;
-  $prenom = $_SESSION['Medecin']->prenomP;
-  afficherPageMedecin($nom, $prenom);
+  afficherPageMedecin();
 }
 
 function CtlCreerRDVAdministratif($nomMedecin, $prenomMedecin, $dateRDVAdmin, $motifRDVAdmin)
@@ -25,13 +23,15 @@ function CtlCreerRDVAdministratif($nomMedecin, $prenomMedecin, $dateRDVAdmin, $m
   }
 }
 
-function CtlBloquerCreneauMedecin($valeur)
+function CtlBloquerCreneauMedecin($valeur, $nomBloPlus, $prenomBloPlus)
 {
-  if (!empty($valeur)) {
-    $a = RecupererIdTaAdmin($valeur);
-    $IdTaAdmin = $a->Id_TacheAdmin;
-    SupprimerInTableTravailAdmin($IdTaAdmin);
-    BloquerCreneau($valeur);
+  if (!empty($valeur && !empty($nomBloPlus)) && !empty($prenomBloPlus)) {
+    $a = RecupererIdMedecin($nomBloPlus, $prenomBloPlus);
+    $idMedecin = $a->id;
+    CreerUnRDVAdminPlus($valeur);
+    $b = RecupererIdRDVAdministratifPlus($valeur);
+    $idTaAdmin = $b->Id_TacheAdmin;
+    CreerUnRDVAdminPlusInTableTravailAdmin($idMedecin, $idTaAdmin);
     afficherBloquerSuccess();
   } else {
     throw new Exception("date est invalide");

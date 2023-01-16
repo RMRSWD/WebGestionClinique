@@ -1,9 +1,8 @@
 <?php
 
 
-function afficherAcceuilleAgent($nom, $prenom)
+function afficherAcceuilleAgent()
 {
-  // $contenuNomPrenom = 'Bonjour ' . $nom . ' ' . $prenom;
 
   require_once('vue/gabarit/gabaritAgent.php');
 }
@@ -58,6 +57,13 @@ function afficherErreurSPPasCoresspondre()
   </script>';
   require_once('vue/gabarit/gabaritAgent.php');
 }
+function afficherErreurDateIndisponible($cause)
+{
+  $afficherErreurDateIndispo = '<script> 
+  alert("Date est indisponnible pour la cause ' . $cause . '. Donnez une autre date.")
+  </script>';
+  require_once('vue/gabarit/gabaritAgent.php');
+}
 
 function afficherEnregisterRDVAvecSuccess()
 {
@@ -108,7 +114,7 @@ function afficherPatient($patient)
             <td> <input type="text" name="departementPatient"  value="' . $ligne->departementnaissance . '"> </td>
             </tr>
             <td>Solde patient</td>
-            <td> <input type="text" name="soldePatient"  value="' . $ligne->solde . '"> </td>
+            <td> <input type="text" name="soldePatient"  value="' . $ligne->solde . '" readonly="readonly"> </td>
             </tr>
             <tr>
             <td colspan="2" align="center">
@@ -191,16 +197,20 @@ function afficherNSSPatient($NSSPatient)
   require_once("vue/gabarit/gabaritAgent.php");
 }
 
-function AfficherPrixMotifRDV($prixMotif)
+function AfficherPrixMotifRDV($prixMotif, $idPatient)
 {
   $afficherPrixMotifRDV = '<form method="POST" action="site.php">
   <fieldset>
-  <legend>NSS du Patient</legend>
+  <legend>Effectuer le payement du patient ID ' . $idPatient . '</legend>
   ';
   foreach ($prixMotif as $ligne) {
     $afficherPrixMotifRDV .= '
     <p>
-    <input type="hidden" name="idPatientPayer" value="' . $ligne->id_Patient . '">
+    <input type="hidden" name="idPatientPayer" value="' . $idPatient . '">
+    </p>
+    <p>
+    <lable>Libelle Motif RDV:</lable>
+    <input type="text" name="libelleMotifPayer" value="' . $ligne->LibelleMo . '" readonly="readonly"> Euros
     </p>
     <p>
     <lable>Prix Motif RDV:</lable>
@@ -266,7 +276,7 @@ function  afficherPiecesEtConsignes($pieceEtConsigne)
 
   $afficherPiecesEtConsignes = '<form method="POST" action="site.php">
   <fieldset>
-  <legend>Tous Les Motif RDV</legend>
+  <legend>Les pièces doivent porter</legend>
 <p>Consignes:<input type="text" value="' . $Consigne . '"readonly="readonly"></p> 
 <p>Pieces:<input type="text" value="' . $LibellePiece . '"readonly="readonly"></p> 
 

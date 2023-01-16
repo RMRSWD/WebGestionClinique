@@ -7,14 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestion Page Medecin</title>
   <script src="vue/fichier.js" text="text/javascript"></script>
+  <link rel="stylesheet" href="vue/gabarit/style.css">
 </head>
 
 <body>
   <h1>
-    <?php
-    echo "Bienvenue sur la page de medecin " . $nom . " " . $prenom;
-
-    ?>
+    Bienvenue sur la page de medecin
   </h1>
   <form action="site.php" method="POST">
     <input type="submit" name="deconnexionMedecin" value="Déconnexion">
@@ -22,7 +20,7 @@
 
   <form action="site.php" method="POST" name="form2">
     <fieldset>
-      <legend>Préparer un RDV Administratif</legend>
+      <legend>Bloquer une date pour RDV Administratif</legend>
 
       <p>
         <label for="">Nom du médecin:</label>
@@ -30,18 +28,18 @@
 
       </p>
       <p>
-        <label for="">Prénom de médecin</label>
+        <label for="">Prénom du médecin</label>
         <input type="text" name="prenomMedecin">
 
       </p>
 
       <p>
-        <label for="">Date RDV Admin : </label>
+        <label for="">Date du RDV Administratif : </label>
         <input type="datetime-local" name="dateRDVAdmin">
       </p>
 
       <p>
-        <label for="">Nom/Motif du RDV : </label>
+        <label for="">Motif du RDV : </label>
         <input type="text" name="LibelleRDVAdmin">
       </p>
 
@@ -63,12 +61,20 @@
 
   <form action="site.php" method="POST" name="form3">
     <fieldset>
-      <legend>Bloquer les crénaux administratif</legend>
-      <i>Vous indiquez ici dans le champ au-dessous pour bloquer les créneaux que vous voulez</i>
+      <legend>Bloquer plusieurs crénaux pour RDV administratif</legend>
+      <i>Veuillez indiquer dans le champ ci-dessous le nombre de crénaux à bloquer</i>
       <p>
+        <label for="">Nom du médecin:</label>
+        <input type="text" name="nomMedecinBloquerPlus">
+      <p>
+        <label for="">Prénom du médedin:</label>
+        <input type="text" name="prenomMedecinBloquerPlus">
+      </p>
+
+      </p>
+      <p>
+        <label for="">Nombre de créneau :</label>
         <input type="text" id="nbCreneaux" onkeyup="CreerChampBloquer()">
-        <!-- <input type="text" name="nbCreneaux" value="" />
-        <input type="submit" value="Execute" onclick="CreerChampBloquer()"> -->
       </p>
 
       <p id="nouveauChampBloquerCreneau">
@@ -76,21 +82,6 @@
       <p id="champValideBloqueCreneau">
 
       </p>
-
-      <!-- <script>
-        function CreerChampBloquer() {
-          champBloquer = "";
-          var nbChamp = document.forms["form3"].elements["nbCreneaux"].value;
-          // var nbChamp = document.getElementById("nbCreaneaux").value;
-
-          if (nbChamp < 10) {
-            for (i = 0; i < nbChamp; i++) {
-              champBloquer = champBloquer + '<p>Créneau' + Number(i + 1) + ' <input type="datetime-local" name="ChampBloqueLesCreneaux"></p>';
-            }
-            document.getElementById("nouveauChampBloquerCreneau").innerHTML = champBloquer;
-          }
-        }
-      </script> -->
     </fieldset>
 
   </form>
@@ -102,10 +93,6 @@
   }
 
   ?>
-
-
-
-
 
 </body>
 
